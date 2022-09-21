@@ -1,73 +1,51 @@
 {
-  "name": "vite-reactts-electron-starter",
-  "version": "0.5.0",
-  "license": "MIT",
-  "main": "main/index.js",
-  "author": {
-    "name": "Maximilian Stümpfl"
-  },
-  "description": "Starter using Vite 2+ React +Typescript + Electron for fast prototyping.",
-  "keywords": [
-    "vite",
-    "react",
-    "electron",
-    "typescript"
-  ],
-  "repository": {
-    "url": "https://github.com/lTimeless/vite-reactts-electron-starter"
-  },
-  "productName": "vite-reactts-electron-starter",
+  "private": true,
+  "name": "my-nextron-app",
+  "description": "My application description",
+  "version": "1.0.0",
+  "author": "Yoshihide Shiono <shiono.yoshihide@gmail.com>",
+  "main": "app/background.js",
   "scripts": {
-    "dev": "concurrently \"yarn dev:vite\" \" yarn dev:electron\"",
-    "dev:vite": "vite",
-    "dev:electron": "npm run build:electron && electron .",
-    "build": "npm run build:vite && npm run build:electron",
-    "build:vite": "vite build",
-    "build:electron": "tsc -p electron",
-    "dist": "npm run build && electron-builder",
-    "pack": "npm run build && electron-builder --dir",
-    "clean": "rimraf dist main src/out",
-    "type-check": "tsc",
-    "lint": "eslint . --ext js,jsx,ts,tsx",
-    "lint:fix": "eslint . --ext js,jsx,ts,tsx --fix"
+    "dev": "nextron",
+    "build": "nextron build",
+    "postinstall": "electron-builder install-app-deps"
   },
   "dependencies": {
-    "@vitejs/plugin-react": "^1.2.0",
-    "electron-is-dev": "^2.0.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "vite": "^2.8.6"
+    "@emotion/react": "^11.8.1",
+    "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.4.2",
+    "@mui/material": "^5.4.2",
+    "@mui/styles": "^5.4.2",
+    "@mui/system": "^5.4.3",
+    "@mui/types": "^7.1.2",
+    "@mui/x-date-pickers": "^5.0.0-alpha.4",
+    "date-fns": "^2.28.0",
+    "electron-serve": "^1.1.0",
+    "electron-store": "^8.1.0",
+    "next": "^12.2.5",
+    "nextron": "^8.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "notistack": "^2.0.3",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
-    "@types/node": "^17.0.22",
-    "@types/react": "^17.0.41",
-    "@types/react-dom": "^17.0.14",
-    "@typescript-eslint/eslint-plugin": "5.16.0",
-    "@typescript-eslint/parser": "5.16.0",
-    "autoprefixer": "^10.4.4",
-    "concurrently": "^7.0.0",
-    "electron": "^17.1.2",
-    "electron-builder": "^22.14.13",
-    "eslint": "8.11.0",
-    "eslint-config-airbnb": "19.0.4",
-    "eslint-config-prettier": "8.5.0",
+    "@types/node": "^16.11.7",
+    "@types/react": "^18.0.8",
+    "@typescript-eslint/eslint-plugin": "^5.12.1",
+    "@typescript-eslint/parser": "^5.12.1",
+    "electron": "^20.1.4",
+    "electron-builder": "^23.3.3",
+    "eslint": "^8.23.1",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-next": "12.1.0",
+    "eslint-config-prettier": "^8.4.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-prettier": "4.0.0",
-    "eslint-plugin-react": "^7.29.4",
-    "postcss": "^8.4.12",
-    "prettier": "2.6.0",
-    "tailwindcss": "^3.0.23",
-    "typescript": "^4.6.2"
-  },
-  "build": {
-    "asar": true,
-    "files": [
-      "main",
-      "src/out"
-    ],
-    "directories": {
-      "buildResources": "resources"
-    }
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "prettier": "^2.7.1",
+    "typescript": "^4.8.2"
   }
 }

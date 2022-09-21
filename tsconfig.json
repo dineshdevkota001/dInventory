@@ -1,21 +1,32 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "types": ["vite/client", "node"],
-    "allowJs": false,
-    "skipLibCheck": false,
-    "esModuleInterop": false,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
     "forceConsistentCasingInFileNames": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
+    "noEmit": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react"
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["renderer/components/*"],
+      "@layouts/*": ["renderer/layouts/*"],
+      "@constants/*": ["renderer/constants/*"],
+      "@hooks/*": ["renderer/hooks/*"],
+      "@public/*": ["renderer/public/*"],
+      "@pages/*": ["renderer/pages/*"],
+      "@assets/*": ["resources/*"],
+      "@schemas/*": ["renderer/schemas/*"],
+      "@styles/*": ["renderer/styles/*"],
+      "@utils/*": ["renderer/utils/*"]
+    }
   },
-  "exclude": ["node_modules"],
-  "include": ["**/*.ts", "**/*.tsx", "**/*.js"]
+  "exclude": ["node_modules", "renderer/next.config.js", "app", "dist"]
 }

@@ -1,37 +1,38 @@
-# Vite + React + Typescript + Electron - Starter
+<p align="center"><img src="https://i.imgur.com/flcMvDC.png"></p>
 
-![Vite + React + Typescript + Tailwind + Electron Starter](Screenshot.jpg)
+## Usage
 
-> It is a simple starter tempalte without unnecessary packages.
+### Create an App
 
-This very simple Starter template, utilizes [Vite](https://github.com/vitejs/vite), [Tailwind](https://tailwindcss.com/), [React](https://reactjs.org/), [Typescript](https://www.typescriptlang.org/) and [Electron](https://electronjs.org/).
+```
+# with npx
+$ npx create-nextron-app my-app --example with-typescript-material-ui
 
-By default, the React framework is used for the interface, but you can easily use any other framework such as Vue, Preact, Angular, Svelte or anything else.
+# with yarn
+$ yarn create nextron-app my-app --example with-typescript-material-ui
 
-> Vite is framework agnostic
+# with pnpx
+$ pnpx create-nextron-app my-app --example with-typescript-material-ui
+```
 
-## Installation
+### Install Dependencies
 
-Clone this repo and install all dependencies  
-`yarn` or `npm install`
+```
+$ cd my-app
 
-## Development
+# using yarn or npm
+$ yarn (or `npm install`)
 
-`yarn dev` or `npm run dev`
+# using pnpm
+$ pnpm install --shamefully-hoist
+```
 
-## Build
+### Use it
 
-`yarn build` or `npm run build`
+```
+# development mode
+$ yarn dev (or `npm run dev` or `pnpm run dev`)
 
-## Publish
-
-`yarn dist` or `npm run dist`
-
-## More advanced templates  
-
-If you are looking for more advanced templates than this, please go to one of the following links (these are some other links out of the **[awesome-vite](https://github.com/vitejs/awesome-vite)** repo) or you can help me make this template better 🙂  
-
-Links: 
-- [vite-react-electron](https://github.com/caoxiemeihao/vite-react-electron)
-- [electron-vite-react](https://github.com/twstyled/electron-vite-react)
-- [vite-electron-esbuild-starter](https://github.com/jctaoo/vite-electron-esbuild-starter)
+# production build
+$ yarn build (or `npm run build` or `pnpm run build`)
+```
