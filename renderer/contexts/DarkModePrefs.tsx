@@ -1,27 +1,19 @@
 import { createTheme, ThemeProvider } from '@mui/material';
-import theme from 'constants/mui/theme';
-import { useDarkMode } from 'hooks/mediaQuery';
-import {
-  createContext,
-  Dispatch,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import { useDarkMode } from '@hooks/mediaQuery';
+import { createContext, Dispatch, useContext, useMemo, useState } from 'react';
 
-interface IUserPrefs {
+interface IDarkModePrefs {
   darkMode: boolean;
   setDarkMode?: Dispatch<boolean>;
 }
 
-const UserPrefsContext = createContext<IUserPrefs>({
+const DarkModePrefsContext = createContext<IDarkModePrefs>({
   darkMode: false,
 });
 
-export const useUserPrefs = () => useContext(UserPrefsContext);
+export const useUserPrefs = () => useContext(DarkModePrefsContext);
 
-export default function UserPrefsProvider({ children }: IHaveChildren) {
+export default function DarkModePrefsProvider({ children }: IHaveChildren) {
   const systemDarkMode = useDarkMode();
 
   const [userDarkMode, setDarkMode] = useState<boolean | undefined>();
@@ -37,7 +29,7 @@ export default function UserPrefsProvider({ children }: IHaveChildren) {
   );
 
   return (
-    <UserPrefsContext.Provider value={value}>
+    <DarkModePrefsContext.Provider value={value}>
       <ThemeProvider
         theme={createTheme({
           palette: {
@@ -47,6 +39,6 @@ export default function UserPrefsProvider({ children }: IHaveChildren) {
       >
         {children}
       </ThemeProvider>
-    </UserPrefsContext.Provider>
+    </DarkModePrefsContext.Provider>
   );
 }

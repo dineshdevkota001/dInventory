@@ -1,15 +1,13 @@
 import { useEffect } from 'react';
-import { ThemeProvider } from '@mui/system';
 import CssBaseline from '@mui/material/CssBaseline';
-import Head from 'next/head';
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import type { AppProps } from 'next/app';
-import theme from '../constants/mui';
-import Layout from 'components/Layout';
 import createCache from '@emotion/cache';
+import Layout from '@components/Layout';
+import DarkModePrefsProvider from '@contexts/DarkModePrefs';
+import LanguageProvider from '@contexts/LanguageContext';
 
 import 'index.css';
-import UserPrefsProvider from 'contexts/UserPrefs';
 
 const isBrowser = typeof document !== 'undefined';
 
@@ -31,7 +29,7 @@ const clientSideEmotionCache = createEmotionCache();
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
 }
-export default function (props: MyAppProps) {
+export default function App(props: MyAppProps) {
   const { Component, emotionCache, pageProps } = props;
 
   useEffect(() => {
@@ -44,12 +42,14 @@ export default function (props: MyAppProps) {
   return (
     <CacheProvider value={emotionCache ?? clientSideEmotionCache}>
       <meta name="viewport" content="initial-scale=1, width=device-width" />
-      <UserPrefsProvider>
-        <CssBaseline />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </UserPrefsProvider>
+      <DarkModePrefsProvider>
+        <LanguageProvider>
+          <CssBaseline />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </LanguageProvider>
+      </DarkModePrefsProvider>
     </CacheProvider>
   );
 }

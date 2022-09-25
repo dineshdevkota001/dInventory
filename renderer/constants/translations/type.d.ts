@@ -5,11 +5,8 @@ type ISidebarKeys =
   | 'partners'
   | 'transactions';
 
-type ITopbarTitleKeys = ISidebarKeys;
-
 type ITranslation = {
   ui: {
     sidebar: Record<ISidebarKeys, string>;
-    topbar: Record<ITopbarTitleKeys, string>;
   };
 };

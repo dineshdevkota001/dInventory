@@ -9,9 +9,13 @@ import {
 import { Title } from '@components/common/Utils';
 import { sidebarItems } from '@constants/generative/layoutConfiguration';
 import Link from 'next/link';
+import { useLanguage } from '@contexts/LanguageContext';
 
 export default function Home() {
   const theme = useTheme();
+
+  const { text } = useLanguage();
+
   return (
     <Grid
       container
@@ -39,7 +43,9 @@ export default function Home() {
                   }}
                 >
                   <Icon fontSize="large" />
-                  <Typography variant="subtitle1">{titleKey}</Typography>
+                  <Typography variant="subtitle1">
+                    {text.ui.sidebar[titleKey]}
+                  </Typography>
                 </CardContent>
               </CardActionArea>
             </Link>

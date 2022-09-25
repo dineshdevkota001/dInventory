@@ -12,9 +12,11 @@ import {
 } from '@mui/material';
 import { sidebarItems } from '@constants/generative/layoutConfiguration';
 import Link from 'next/link';
-import { useUserPrefs } from '@contexts/UserPrefs';
+import { useUserPrefs } from '@contexts/DarkModePrefs';
 import { DarkModeRounded, LightModeRounded } from '@mui/icons-material';
 import { useRouter } from 'next/router';
+import usePageConfiguration from '@hooks/usePageConfiguration';
+import { useLanguage } from '@contexts/LanguageContext';
 
 interface ISidebarProps {
   open?: boolean;
@@ -24,6 +26,10 @@ export default function Sidebar({ open }: ISidebarProps) {
   const theme = useTheme();
   const { darkMode, setDarkMode } = useUserPrefs();
   const { pathname } = useRouter();
+  const pageConfiguration = usePageConfiguration();
+  const { text } = useLanguage();
+
+  console.log(text);
 
   return (
     <Drawer
@@ -49,12 +55,20 @@ export default function Sidebar({ open }: ISidebarProps) {
       <List>
         {sidebarItems.map(({ href, titleKey, Icon }) => (
           <Link href={href} passHref>
-            <ListItemButton selected={titleKey}>
+            <ListItemButton
+              selected={titleKey === pageConfiguration.sidebarKey}
+            >
               <ListItem>
                 <ListItemIcon>
-                  <Icon color={titleKey ? 'primary' : undefined} />
+                  <Icon
+                    color={
+                      titleKey === pageConfiguration.sidebarKey
+                        ? 'primary'
+                        : undefined
+                    }
+                  />
                 </ListItemIcon>
-                <ListItemText primary={titleKey} />
+                <ListItemText primary={text.ui.sidebar?.[titleKey]} />
               </ListItem>
             </ListItemButton>
           </Link>

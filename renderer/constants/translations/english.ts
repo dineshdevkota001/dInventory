@@ -1,11 +1,13 @@
-export const englishTranslation: ITranslation = {
+const englishTranslations: ITranslation = {
   ui: {
     sidebar: {
-      buyer: 'Buyer',
       inventory: 'Inventory',
-      notification: 'Notification',
-      seller: 'Seller',
-      transaction: 'Transaction',
+      transactions: 'Transactions',
+      partners: 'Partners',
+      home: 'My Store',
+      items: 'Items',
     },
   },
 };
+
+export default englishTranslations;

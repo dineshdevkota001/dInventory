@@ -10,6 +10,7 @@ import {
   INVENTORY,
   ITEMS,
   PARTNERS,
+  ROOT,
   TRANSACTIONS,
 } from '@constants/static/routes';
 
@@ -43,23 +44,27 @@ export const sidebarItems: ISidebarItem[] = [
 
 export const pageConfiguration = [
   {
-    href: HOME,
+    route: HOME,
     sidebarKey: 'home',
   },
   {
-    href: INVENTORY,
+    route: INVENTORY,
     sidebarKey: 'inventory',
   },
   {
-    href: ITEMS,
+    route: ITEMS,
     sidebarKey: 'items',
   },
   {
-    href: PARTNERS,
+    route: PARTNERS,
     sidebarKey: 'partners',
   },
   {
-    href: TRANSACTIONS,
+    route: TRANSACTIONS,
     sidebarKey: 'transactions',
+  },
+  {
+    route: ROOT,
+    sidebarKey: '',
   },
 ];
