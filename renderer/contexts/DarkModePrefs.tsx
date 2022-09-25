@@ -11,7 +11,7 @@ const DarkModePrefsContext = createContext<IDarkModePrefs>({
   darkMode: false,
 });
 
-export const useUserPrefs = () => useContext(DarkModePrefsContext);
+export const useDarkModePrefs = () => useContext(DarkModePrefsContext);
 
 export default function DarkModePrefsProvider({ children }: IHaveChildren) {
   const systemDarkMode = useDarkMode();

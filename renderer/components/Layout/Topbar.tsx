@@ -1,24 +1,13 @@
 import {
-  HouseRounded,
-  MenuRounded,
-  MenuOpenRounded,
-  ArrowBackRounded,
-  ArrowForwardRounded,
+  HouseOutlined,
+  MenuOutlined,
+  MenuOpenOutlined,
 } from '@mui/icons-material';
-import {
-  AppBar,
-  Box,
-  ButtonGroup,
-  IconButton,
-  TextField,
-  Toolbar,
-  Typography,
-} from '@mui/material';
-import { APP_NAME } from 'constants/static/conf';
-import { ROOT } from 'constants/static/routes';
+import { AppBar, IconButton, TextField, Toolbar } from '@mui/material';
+import { APP_NAME } from '@constants/static/configurations';
+import { ROOT } from '@constants/static/routes';
 import Link from 'next/link';
 import { Dispatch } from 'react';
-import NavigationButtons from './NavigationButtons';
 
 interface ITopbarProps {
   setSidebarOpen?: Dispatch<boolean>;
@@ -49,13 +38,13 @@ export default function Topbar({
           color="inherit"
           onClick={() => setSidebarOpen(!sidebarOpen)}
         >
-          {sidebarOpen ? <MenuOpenRounded /> : <MenuRounded />}
+          {sidebarOpen ? <MenuOpenOutlined /> : <MenuOutlined />}
         </IconButton>
-        <NavigationButtons />
-        <TextField placeholder={`Search ${title ?? APP_NAME}`} size="small" />
+        {/* <NavigationButtons /> */}
+        <TextField placeholder={`Search ${title ?? APP_NAME}`} fullWidth />
         <Link href={ROOT}>
           <IconButton color="inherit">
-            <HouseRounded />
+            <HouseOutlined />
           </IconButton>
         </Link>
       </Toolbar>

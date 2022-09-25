@@ -65,6 +65,6 @@ export const pageConfiguration = [
   },
   {
     route: ROOT,
-    sidebarKey: '',
+    sidebarKey: '/',
   },
 ];

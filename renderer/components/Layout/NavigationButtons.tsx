@@ -1,4 +1,4 @@
-import { ArrowBackRounded, ArrowForwardRounded } from '@mui/icons-material';
+import { ArrowBackOutlined, ArrowForwardOutlined } from '@mui/icons-material';
 import { ButtonGroup, IconButton } from '@mui/material';
 
 export default function NavigationButtons() {
@@ -6,10 +6,10 @@ export default function NavigationButtons() {
     return (
       <ButtonGroup>
         <IconButton color="inherit">
-          <ArrowBackRounded />
+          <ArrowBackOutlined />
         </IconButton>
         <IconButton color="inherit">
-          <ArrowForwardRounded />
+          <ArrowForwardOutlined />
         </IconButton>
       </ButtonGroup>
     );
@@ -21,14 +21,14 @@ export default function NavigationButtons() {
         onClick={() => window.history.back()}
         disabled={(window.history.state ?? 0) === 0}
       >
-        <ArrowBackRounded />
+        <ArrowBackOutlined />
       </IconButton>
       <IconButton
         color="inherit"
         onClick={() => window.history.forward()}
         disabled={(window.history.state ?? 0) < window.history.length}
       >
-        <ArrowForwardRounded />
+        <ArrowForwardOutlined />
       </IconButton>
     </ButtonGroup>
   );

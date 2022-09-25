@@ -1,11 +1,13 @@
 import React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheets } from '@mui/styles';
+import { Title } from '@components/common/Utils';
 
 export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="en" dir="ltr">
+        <Title />
         <Head>
           <meta charSet="utf-8" />
           <meta name="theme-color" content="#001100" />

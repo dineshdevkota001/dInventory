@@ -4,7 +4,6 @@ import {
   Divider,
   ListItemButton,
   ListItemText,
-  Toolbar,
   Drawer,
   List,
   ListItem,
@@ -12,11 +11,12 @@ import {
 } from '@mui/material';
 import { sidebarItems } from '@constants/generative/layoutConfiguration';
 import Link from 'next/link';
-import { useUserPrefs } from '@contexts/DarkModePrefs';
-import { DarkModeRounded, LightModeRounded } from '@mui/icons-material';
-import { useRouter } from 'next/router';
+import { HubOutlined } from '@mui/icons-material';
 import usePageConfiguration from '@hooks/usePageConfiguration';
 import { useLanguage } from '@contexts/LanguageContext';
+import { APP_NAME } from '@constants/static/configurations';
+import { ROOT } from '@constants/static/routes';
+import DarkModeButton from './DarkModeButton';
 
 interface ISidebarProps {
   open?: boolean;
@@ -24,12 +24,8 @@ interface ISidebarProps {
 
 export default function Sidebar({ open }: ISidebarProps) {
   const theme = useTheme();
-  const { darkMode, setDarkMode } = useUserPrefs();
-  const { pathname } = useRouter();
   const pageConfiguration = usePageConfiguration();
   const { text } = useLanguage();
-
-  console.log(text);
 
   return (
     <Drawer
@@ -49,8 +45,24 @@ export default function Sidebar({ open }: ISidebarProps) {
         },
       }}
     >
-      <Divider />
-      <Toolbar>{pathname}</Toolbar>
+      <Box>
+        <Link href={ROOT}>
+          <ListItemButton>
+            <ListItem>
+              <ListItemIcon>
+                <HubOutlined
+                  color={
+                    pageConfiguration.sidebarKey === ROOT
+                      ? 'primary'
+                      : undefined
+                  }
+                />
+              </ListItemIcon>
+              <ListItemText primary={APP_NAME} />
+            </ListItem>
+          </ListItemButton>
+        </Link>
+      </Box>
       <Divider />
       <List>
         {sidebarItems.map(({ href, titleKey, Icon }) => (
@@ -75,16 +87,7 @@ export default function Sidebar({ open }: ISidebarProps) {
         ))}
       </List>
       <Box flexGrow={1} />
-      <Box>
-        <ListItemButton onClick={() => setDarkMode(!darkMode)}>
-          <ListItem>
-            <ListItemIcon>
-              {darkMode ? <DarkModeRounded /> : <LightModeRounded />}
-            </ListItemIcon>
-            <ListItemText>Dark Mode</ListItemText>
-          </ListItem>
-        </ListItemButton>
-      </Box>
+      <DarkModeButton />
     </Drawer>
   );
 }
