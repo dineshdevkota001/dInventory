@@ -1,7 +1,6 @@
 import React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheets } from '@mui/styles';
-import { palette } from '@mui/system';
 
 export default class MyDocument extends Document {
   render() {

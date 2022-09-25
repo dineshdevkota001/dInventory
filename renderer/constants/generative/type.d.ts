@@ -1,5 +1,5 @@
 interface ISidebarItem {
   href: string;
-  title: keyof ITranslation['ui']['sidebar'];
+  titleKey: ISidebarKeys;
   Icon: React.FC<React.SVGProps>;
 }

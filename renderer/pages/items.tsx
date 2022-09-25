@@ -1,5 +1,5 @@
 import { UnderConstruction } from '@components/common/Placeholder';
 
-export default function Home() {
+export default function Buyer() {
   return <UnderConstruction />;
 }

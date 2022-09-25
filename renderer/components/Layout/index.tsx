@@ -1,6 +1,4 @@
-import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { Stack } from '@mui/system';
-import useDarkMode from 'hooks/mediaQuery/useDarkMode';
 import { useState } from 'react';
 import Sidebar from './Sidebar';
 import Topbar from './Topbar';

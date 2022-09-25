@@ -1,18 +1,17 @@
 import {
-  Button,
   Card,
   CardActionArea,
   CardContent,
-  Container,
   Grid,
-  Stack,
   Typography,
+  useTheme,
 } from '@mui/material';
-import Title from 'components/common/Utils/Title';
-import { sidebarItems } from 'constants/generative/sidebar';
+import { Title } from '@components/common/Utils';
+import { sidebarItems } from '@constants/generative/layoutConfiguration';
 import Link from 'next/link';
 
 export default function Home() {
+  const theme = useTheme();
   return (
     <Grid
       container
@@ -21,17 +20,26 @@ export default function Home() {
       p={4}
       width={1}
       flexGrow={1}
-      height={'100vh'}
+      gap={5}
     >
       <Title title="Hub" />
-      {sidebarItems.map(({ Icon, href, title }) => (
+      {sidebarItems.map(({ Icon, href, titleKey }) => (
         <Grid item>
           <Card>
             <Link href={href}>
               <CardActionArea>
-                <CardContent>
+                <CardContent
+                  sx={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    minWidth: theme.spacing(20),
+                    minHeight: theme.spacing(20),
+                  }}
+                >
                   <Icon fontSize="large" />
-                  <Typography variant="subtitle1">{title}</Typography>
+                  <Typography variant="subtitle1">{titleKey}</Typography>
                 </CardContent>
               </CardActionArea>
             </Link>

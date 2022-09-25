@@ -4,15 +4,17 @@ import {
   Divider,
   ListItemButton,
   ListItemText,
-  Switch,
   Toolbar,
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
 } from '@mui/material';
-import { Drawer, List, ListItem, ListItemIcon } from '@mui/material';
-import { sidebarItems } from 'constants/generative/sidebar';
+import { sidebarItems } from '@constants/generative/layoutConfiguration';
 import Link from 'next/link';
-import { useDarkMode } from 'hooks/mediaQuery';
-import { useUserPrefs } from 'contexts/UserPrefs';
+import { useUserPrefs } from '@contexts/UserPrefs';
 import { DarkModeRounded, LightModeRounded } from '@mui/icons-material';
+import { useRouter } from 'next/router';
 
 interface ISidebarProps {
   open?: boolean;
@@ -21,6 +23,7 @@ interface ISidebarProps {
 export default function Sidebar({ open }: ISidebarProps) {
   const theme = useTheme();
   const { darkMode, setDarkMode } = useUserPrefs();
+  const { pathname } = useRouter();
 
   return (
     <Drawer
@@ -40,20 +43,18 @@ export default function Sidebar({ open }: ISidebarProps) {
         },
       }}
     >
-      <Toolbar />
+      <Divider />
+      <Toolbar>{pathname}</Toolbar>
       <Divider />
       <List>
-        {sidebarItems.map(({ href, title, Icon }) => (
+        {sidebarItems.map(({ href, titleKey, Icon }) => (
           <Link href={href} passHref>
-            <ListItemButton>
-              <ListItem
-                sx={{ width: theme.spacing(32) }}
-                selected={title === 'seller'}
-              >
+            <ListItemButton selected={titleKey}>
+              <ListItem>
                 <ListItemIcon>
-                  <Icon color={title === 'seller' ? 'primary' : undefined} />
+                  <Icon color={titleKey ? 'primary' : undefined} />
                 </ListItemIcon>
-                <ListItemText primary={title} />
+                <ListItemText primary={titleKey} />
               </ListItem>
             </ListItemButton>
           </Link>
