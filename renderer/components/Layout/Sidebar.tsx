@@ -46,7 +46,7 @@ export default function Sidebar({ open }: ISidebarProps) {
       }}
     >
       <Box>
-        <Link href={ROOT}>
+        <Link href={ROOT} passHref>
           <ListItemButton>
             <ListItem>
               <ListItemIcon>
@@ -66,7 +66,7 @@ export default function Sidebar({ open }: ISidebarProps) {
       <Divider />
       <List>
         {sidebarItems.map(({ href, titleKey, Icon }) => (
-          <Link href={href} passHref>
+          <Link href={href} passHref key={titleKey}>
             <ListItemButton
               selected={titleKey === pageConfiguration.sidebarKey}
             >

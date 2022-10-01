@@ -28,9 +28,9 @@ export default function Home() {
     >
       <Title title="Hub" />
       {sidebarItems.map(({ Icon, href, titleKey }) => (
-        <Grid item>
+        <Grid item key={titleKey}>
           <Card>
-            <Link href={href}>
+            <Link href={href} passHref>
               <CardActionArea>
                 <CardContent
                   sx={{

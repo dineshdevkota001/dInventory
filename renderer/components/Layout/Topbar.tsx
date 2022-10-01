@@ -42,7 +42,7 @@ export default function Topbar({
         </IconButton>
         {/* <NavigationButtons /> */}
         <TextField placeholder={`Search ${title ?? APP_NAME}`} fullWidth />
-        <Link href={ROOT}>
+        <Link href={ROOT} passHref>
           <IconButton color="inherit">
             <HouseOutlined />
           </IconButton>

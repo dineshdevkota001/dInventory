@@ -38,7 +38,7 @@ export default function LanguageProvider({ children }: IHaveChildren) {
       setLanguage: setUserLanguage,
       text,
     }),
-    [language],
+    [language, text],
   );
 
   return (
