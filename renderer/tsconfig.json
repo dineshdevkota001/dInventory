@@ -12,7 +12,10 @@
       "@schemas/*": ["./schemas/*"],
       "@generated/*": ["generated/*"],
       "@styles/*": ["./styles/*"],
-      "@utils/*": ["./utils/*"]
+      "@utils/*": ["./utils/*"],
+      "@database/*": ["./database/*"],
+      "@models/*": ["./database/models/*"],
+      "@interfaces/*": ["./interfaces/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
