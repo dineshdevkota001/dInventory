@@ -3,6 +3,7 @@ type ISidebarKeys =
   | 'items'
   | 'home'
   | 'partners'
+  | 'address'
   | 'transactions';
 
 type ITranslation = {

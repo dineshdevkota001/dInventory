@@ -6,6 +6,7 @@ const englishTranslations: ITranslation = {
       partners: 'Partners',
       home: 'My Store',
       items: 'Items',
+      address: 'Address',
     },
   },
 };

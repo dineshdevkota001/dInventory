@@ -4,8 +4,10 @@ import {
   LocalShippingOutlined,
   HandshakeOutlined,
   MoneyOutlined,
+  MyLocationOutlined,
 } from '@mui/icons-material';
 import {
+  ADDRESS,
   HOME,
   INVENTORY,
   ITEMS,
@@ -40,6 +42,11 @@ export const sidebarItems: ISidebarItem[] = [
     Icon: MoneyOutlined,
     titleKey: 'transactions',
   },
+  {
+    href: ADDRESS,
+    Icon: MyLocationOutlined,
+    titleKey: 'address',
+  },
 ];
 
 export const pageConfiguration = [
@@ -62,6 +69,10 @@ export const pageConfiguration = [
   {
     route: TRANSACTIONS,
     sidebarKey: 'transactions',
+  },
+  {
+    route: ADDRESS,
+    sidebarKey: 'address',
   },
   {
     route: ROOT,
