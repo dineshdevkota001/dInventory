@@ -81,3 +81,20 @@ interface ITransactionItem {
   itemId: IID;
   count: number;
 }
+
+type CamelCase<S extends string> =
+  S extends `${infer P1}_${infer P2}${infer P3}`
+    ? `${Lowercase<P1>}${Uppercase<P2>}${CamelCase<P3>}`
+    : Lowercase<S>;
+
+type IFromDb<T> = {
+  [K in keyof T as CamelCase<string & K>]: T[K];
+};
+
+type CamelToSnakeCase<S extends string> = S extends `${infer T}${infer U}`
+  ? `${T extends Capitalize<T> ? '_' : ''}${Lowercase<T>}${CamelToSnakeCase<U>}`
+  : S;
+
+type IToDb<T> = {
+  [K in keyof T as CamelToSnakeCase<string & K>]: T[K];
+};

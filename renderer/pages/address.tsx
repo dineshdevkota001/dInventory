@@ -1,20 +1,12 @@
 import { getAddress } from '@database/models/address';
-import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import Table from '@components/core/Table';
 import AddAddress from '@components/address/AddAddress';
+import useDatabase from '@hooks/useDatabase';
 
-export default function Buyer() {
-  const [address, setAddress] = useState<IAddress[] | undefined>();
-  useEffect(() => {
-    (async () => {
-      const addresses = await getAddress();
-      setAddress(addresses.rows);
-    })();
-  }, []);
-
-  const loading = typeof address === 'undefined';
-
+export default function Address() {
+  const { data, loading } = useDatabase(getAddress, []);
+  const address = data?.rows;
   if (loading) return null;
 
   return (
@@ -34,7 +26,8 @@ export default function Buyer() {
         },
         {
           header: 'Created On',
-          accessorFn: ({ created_on }) => format(created_on, 'yyyy MMM dd'),
+          accessorFn: ({ created_on }) =>
+            format(new Date(created_on), 'yyyy MMM dd'),
         },
       ]}
     />

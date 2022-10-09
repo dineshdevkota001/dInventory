@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { cloneElement, ReactElement, useState } from 'react';
 
-type IAlertProps = Pick<DialogProps, 'open' | 'onClose'> & {
+type IAlertProps = Partial<Pick<DialogProps, 'open' | 'onClose'>> & {
   title?: string;
   onConfirm?: () => void;
   button: ReactElement<{ onClick: () => void }>;
