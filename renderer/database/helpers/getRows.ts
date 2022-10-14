@@ -2,8 +2,8 @@ import jsToPostgres from './jsToPostgres';
 
 export default function getRows<T extends IDatabaseTable>(
   tableName: T,
-  selectFields?: (keyof IDatabaseTypeMap[T])[],
-  queryExtension?: Partial<IDatabaseTypeMap[T]>,
+  selectFields?: IDatabaseKeys<T>[],
+  queryExtension?: string,
 ) {
   const baseQuery = `SELECT ${
     !selectFields?.length

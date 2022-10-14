@@ -32,6 +32,10 @@ export default function Partners() {
             `${email ?? ''}${email ? ', ' : ''}${phone}`,
         },
         {
+          header: 'Address',
+          accessorFn: row => `${row.city} ${row.ward_no}, ${row.tole}`,
+        },
+        {
           header: 'Description',
           accessorKey: 'description',
         },

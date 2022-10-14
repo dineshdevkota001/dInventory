@@ -9,6 +9,7 @@ interface IDatabaseTypeMap {
 }
 
 type IDatabaseTable = keyof IDatabaseTypeMap;
+type IDatabaseKeys<T> = IToDb<keyof IDatabaseTypeMap[T]>;
 
 interface IAddress {
   id: IID;

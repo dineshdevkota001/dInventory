@@ -14,7 +14,6 @@ export default function Address() {
       data={address}
       renderTopToolbarCustomActions={AddAddress}
       columns={[
-        { header: 'Id', accessorKey: 'id' },
         {
           header: 'Tole',
           accessorKey: 'tole',
