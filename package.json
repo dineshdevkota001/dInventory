@@ -1,14 +1,15 @@
 {
   "private": true,
-  "name": "my-nextron-app",
-  "description": "My application description",
+  "name": "next-inventory",
+  "description": "Inventory Management 101",
   "version": "1.0.0",
-  "author": "Yoshihide Shiono <shiono.yoshihide@gmail.com>",
+  "author": "Dinesh Devkota",
   "main": "app/background.js",
   "scripts": {
     "dev": "nextron",
     "build": "nextron build",
-    "postinstall": "electron-builder install-app-deps"
+    "postinstall": "electron-builder install-app-deps",
+    "codegen": "graphql-codegen --config graphql-codegen.ts"
   },
   "dependencies": {
     "@emotion/cache": "^11.10.3",
@@ -36,8 +37,12 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
-    "@types/node": "^16.11.7",
-    "@types/pg": "^8.6.5",
+    "@graphql-codegen/cli": "2.13.8",
+    "@graphql-codegen/client-preset": "1.1.1",
+    "@graphql-codegen/introspection": "2.2.1",
+    "@graphql-codegen/typescript-enum-array": "^2.2.1",
+    "@graphql-codegen/typescript-urql": "^3.7.2",
+    "@graphql-codegen/urql-introspection": "^2.2.1",
     "@types/react": "^18.0.8",
     "@types/react-table": "^7.7.12",
     "@typescript-eslint/eslint-plugin": "^5.12.1",

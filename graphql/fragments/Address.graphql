@@ -1,0 +1,9 @@
+fragment RegularAddress on Address {
+  id
+  ward
+  tole
+  createdOn
+  country
+  city
+  district
+}

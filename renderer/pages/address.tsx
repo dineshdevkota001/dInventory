@@ -1,9 +1,12 @@
 import { format } from 'date-fns';
 import Table from '@components/core/Table';
 import AddAddress from '@components/address/AddAddress';
+import { useGetAddressesQuery } from '@generated/graphql';
 
 export default function Address() {
-  const address = [];
+  const [{ data }] = useGetAddressesQuery();
+  const address = data?.getAddresses ?? [];
+
   return (
     <Table
       data={address}
@@ -15,13 +18,13 @@ export default function Address() {
         },
         {
           header: 'Address',
-          accessorFn: ({ city, country, district, ward_no }) =>
-            `${city} ${ward_no}, ${district}, ${country}`,
+          accessorFn: ({ city, country, district, ward }) =>
+            `${city} ${ward}, ${district}, ${country}`,
         },
         {
           header: 'Created On',
-          accessorFn: ({ created_on }) =>
-            format(new Date(created_on), 'yyyy MMM dd'),
+          accessorFn: ({ createdOn }) =>
+            format(new Date(createdOn), 'yyyy MMM dd'),
         },
       ]}
     />
