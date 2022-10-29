@@ -13,8 +13,6 @@
       "@generated/*": ["generated/*"],
       "@styles/*": ["./styles/*"],
       "@utils/*": ["./utils/*"],
-      "@database/*": ["./database/*"],
-      "@models/*": ["./database/models/*"],
       "@interfaces/*": ["./interfaces/*"]
     }
   },
