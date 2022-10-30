@@ -1,8 +1,12 @@
 type Maybe<T> = T | null;
 type InputMaybe<T> = Maybe<T>;
 type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>;
+};
+type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>;
+};
 /** All built-in and custom scalars, mapped to their actual values */
 type Scalars = {
   ID: string;
@@ -76,21 +80,17 @@ type IMutation = {
   removeUser?: Maybe<IUser>;
 };
 
-
 type IMutationCreateAddressArgs = {
   data?: InputMaybe<IAddressCreateInput>;
 };
-
 
 type IMutationCreateUserArgs = {
   data: IUserCreateInput;
 };
 
-
 type IMutationRemoveAddressArgs = {
   where: IIdWhereUniqueInput;
 };
-
 
 type IMutationRemoveUserArgs = {
   where: IIdWhereUniqueInput;
@@ -117,7 +117,7 @@ enum ProductType {
   Feed = 'Feed',
   Medicine = 'Medicine',
   Poison = 'Poison',
-  Tool = 'Tool'
+  Tool = 'Tool',
 }
 
 type IQuery = {
@@ -130,16 +130,13 @@ type IQuery = {
   users?: Maybe<Array<IUser>>;
 };
 
-
 type IQueryAddressArgs = {
   where?: InputMaybe<IIdWhereUniqueInput>;
 };
 
-
 type IQueryGetInventoryByIdArgs = {
   where?: InputMaybe<IIdWhereUniqueInput>;
 };
-
 
 type IQueryUserArgs = {
   where?: InputMaybe<IIdWhereUniqueInput>;
@@ -161,7 +158,7 @@ type ITransaction = {
 };
 
 enum TransactionChannel {
-  Cash = 'Cash'
+  Cash = 'Cash',
 }
 
 type ITransactionItem = {
@@ -176,7 +173,7 @@ enum TransactionType {
   Buy = 'Buy',
   Pay = 'Pay',
   Recieve = 'Recieve',
-  Sell = 'Sell'
+  Sell = 'Sell',
 }
 
 /** User */
@@ -207,25 +204,79 @@ type IUserCreateInput = {
   phoneNumber?: InputMaybe<Scalars['String']>;
 };
 
-type IRegularAddressFragment = { __typename?: 'Address', id: string, ward: number, tole?: string | null, createdOn: any, country: string, city: string, district: string };
+type IRegularAddressFragment = {
+  __typename?: 'Address';
+  id: string;
+  ward: number;
+  tole?: string | null;
+  createdOn: any;
+  country: string;
+  city: string;
+  district: string;
+};
 
-type IRegularPageInfoFragment = { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean };
+type IRegularPageInfoFragment = {
+  __typename?: 'PageInfo';
+  endCursor?: string | null;
+  hasNextPage: boolean;
+};
 
 type ICreateAddressMutationVariables = Exact<{
   data?: InputMaybe<IAddressCreateInput>;
 }>;
 
-
-type ICreateAddressMutation = { __typename?: 'Mutation', createAddress?: { __typename?: 'Address', id: string, ward: number, tole?: string | null, createdOn: any, country: string, city: string, district: string } | null };
+type ICreateAddressMutation = {
+  __typename?: 'Mutation';
+  createAddress?: {
+    __typename?: 'Address';
+    id: string;
+    ward: number;
+    tole?: string | null;
+    createdOn: any;
+    country: string;
+    city: string;
+    district: string;
+  } | null;
+};
 
 type IRemoveAddressMutationVariables = Exact<{
   where: IIdWhereUniqueInput;
 }>;
 
+type IRemoveAddressMutation = {
+  __typename?: 'Mutation';
+  removeAddress?: {
+    __typename?: 'Address';
+    id: string;
+    ward: number;
+    tole?: string | null;
+    createdOn: any;
+    country: string;
+    city: string;
+    district: string;
+  } | null;
+};
 
-type IRemoveAddressMutation = { __typename?: 'Mutation', removeAddress?: { __typename?: 'Address', id: string, ward: number, tole?: string | null, createdOn: any, country: string, city: string, district: string } | null };
+type IAddressesQueryVariables = Exact<{ [key: string]: never }>;
 
-type IAddressesQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type IAddressesQuery = { __typename?: 'Query', addresses?: { __typename?: 'AddressList', items?: Array<{ __typename?: 'Address', id: string, ward: number, tole?: string | null, createdOn: any, country: string, city: string, district: string }> | null, pageInfo?: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean } | null } | null };
+type IAddressesQuery = {
+  __typename?: 'Query';
+  addresses?: {
+    __typename?: 'AddressList';
+    items?: Array<{
+      __typename?: 'Address';
+      id: string;
+      ward: number;
+      tole?: string | null;
+      createdOn: any;
+      country: string;
+      city: string;
+      district: string;
+    }> | null;
+    pageInfo?: {
+      __typename?: 'PageInfo';
+      endCursor?: string | null;
+      hasNextPage: boolean;
+    } | null;
+  } | null;
+};

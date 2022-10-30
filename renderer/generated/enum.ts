@@ -3,16 +3,16 @@ export enum ProductType {
   Feed = 'Feed',
   Medicine = 'Medicine',
   Poison = 'Poison',
-  Tool = 'Tool'
+  Tool = 'Tool',
 }
 
 export enum TransactionChannel {
-  Cash = 'Cash'
+  Cash = 'Cash',
 }
 
 export enum TransactionType {
   Buy = 'Buy',
   Pay = 'Pay',
   Recieve = 'Recieve',
-  Sell = 'Sell'
+  Sell = 'Sell',
 }
