@@ -1,54 +1,30 @@
-import {
-  Button,
-  ButtonGroup,
-  Dialog,
-  DialogContent,
-  DialogContentText,
-  DialogProps,
-  DialogTitle,
-} from '@mui/material';
-import { cloneElement, ReactElement, useState } from 'react';
+import { DialogContentText } from '@mui/material';
+import Content, { IContentProps } from './Content';
+import Root, { IRootProps } from './Root';
 
-type IAlertProps = Partial<Pick<DialogProps, 'open' | 'onClose'>> & {
-  title?: string;
-  onConfirm?: () => void;
-  button: ReactElement<{ onClick: () => void }>;
-};
+export type IAlertProps = IRootProps &
+  IContentProps & { description?: string } & Partial<IHaveChildren>;
 
 export default function Alert({
-  open: propOpen,
-  onClose: propOnClose,
+  open,
+  onClose,
   title,
-  button,
   onConfirm,
+  children,
+  description,
+  ...props
 }: IAlertProps) {
-  const [localOpen, setLocalOpen] = useState(false);
-
-  const handleOpen = () => (button ? setLocalOpen(true) : undefined);
-  const onClose = () => {
-    if (button) setLocalOpen(false);
-    (propOnClose as () => void)?.();
-  };
-
-  const open = button ? localOpen : propOpen;
-
   return (
-    <>
-      {button ? cloneElement(button, { onClick: handleOpen }) : null}
-      <Dialog {...{ open, onClose }} PaperProps={{ sx: { minWidth: 300 } }}>
-        <DialogTitle>{title}</DialogTitle>
-        <DialogContent>
-          <DialogContentText>This is stuuff</DialogContentText>
-        </DialogContent>
-        <ButtonGroup fullWidth>
-          <Button color="error" variant="text" onClick={onClose}>
-            Cancel
-          </Button>
-          <Button variant="text" onClick={onConfirm}>
-            Confirm
-          </Button>
-        </ButtonGroup>
-      </Dialog>
-    </>
+    <Root {...{ open, onClose, title }}>
+      {children ?? (
+        <Content
+          onCancel={onClose as () => void}
+          onConfirm={onConfirm}
+          {...props}
+        >
+          <DialogContentText>{description}</DialogContentText>
+        </Content>
+      )}
+    </Root>
   );
 }

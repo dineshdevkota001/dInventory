@@ -33,6 +33,12 @@ type IAddressCreateInput = {
   ward: Scalars['Int'];
 };
 
+type IAddressList = {
+  __typename?: 'AddressList';
+  items?: Maybe<Array<IAddress>>;
+  pageInfo?: Maybe<IPageInfo>;
+};
+
 type IIdWhereUniqueInput = {
   id: Scalars['String'];
 };
@@ -90,6 +96,12 @@ type IMutationRemoveUserArgs = {
   where: IIdWhereUniqueInput;
 };
 
+type IPageInfo = {
+  __typename?: 'PageInfo';
+  endCursor?: Maybe<Scalars['String']>;
+  hasNextPage: Scalars['Boolean'];
+};
+
 type IProduct = {
   __typename?: 'Product';
   description?: Maybe<Scalars['String']>;
@@ -110,16 +122,16 @@ enum ProductType {
 
 type IQuery = {
   __typename?: 'Query';
-  getAddressById?: Maybe<IAddress>;
-  getAddresses?: Maybe<Array<IAddress>>;
+  address?: Maybe<IAddress>;
+  addresses?: Maybe<IAddressList>;
   getInventories?: Maybe<Array<IInventory>>;
   getInventoryById?: Maybe<IInventory>;
-  getUserById?: Maybe<IUser>;
-  getUsers?: Maybe<Array<IUser>>;
+  user?: Maybe<IUser>;
+  users?: Maybe<Array<IUser>>;
 };
 
 
-type IQueryGetAddressByIdArgs = {
+type IQueryAddressArgs = {
   where?: InputMaybe<IIdWhereUniqueInput>;
 };
 
@@ -129,7 +141,7 @@ type IQueryGetInventoryByIdArgs = {
 };
 
 
-type IQueryGetUserByIdArgs = {
+type IQueryUserArgs = {
   where?: InputMaybe<IIdWhereUniqueInput>;
 };
 
@@ -197,7 +209,9 @@ type IUserCreateInput = {
 
 type IRegularAddressFragment = { __typename?: 'Address', id: string, ward: number, tole?: string | null, createdOn: any, country: string, city: string, district: string };
 
-type IGetAddressesQueryVariables = Exact<{ [key: string]: never; }>;
+type IRegularPageInfoFragment = { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean };
+
+type IAddressesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type IGetAddressesQuery = { __typename?: 'Query', getAddresses?: Array<{ __typename?: 'Address', id: string, ward: number, tole?: string | null, createdOn: any, country: string, city: string, district: string }> | null };
+type IAddressesQuery = { __typename?: 'Query', addresses?: { __typename?: 'AddressList', items?: Array<{ __typename?: 'Address', id: string, ward: number, tole?: string | null, createdOn: any, country: string, city: string, district: string }> | null, pageInfo?: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean } | null } | null };

@@ -12,14 +12,26 @@ export const RegularAddressFragmentDoc = gql`
   district
 }
     `;
-export const GetAddressesDocument = gql`
-    query GetAddresses {
-  getAddresses {
-    ...RegularAddress
+export const RegularPageInfoFragmentDoc = gql`
+    fragment RegularPageInfo on PageInfo {
+  endCursor
+  hasNextPage
+}
+    `;
+export const AddressesDocument = gql`
+    query Addresses {
+  addresses {
+    items {
+      ...RegularAddress
+    }
+    pageInfo {
+      ...RegularPageInfo
+    }
   }
 }
-    ${RegularAddressFragmentDoc}`;
+    ${RegularAddressFragmentDoc}
+${RegularPageInfoFragmentDoc}`;
 
-export function useGetAddressesQuery(options?: Omit<Urql.UseQueryArgs<IGetAddressesQueryVariables>, 'query'>) {
-  return Urql.useQuery<IGetAddressesQuery, IGetAddressesQueryVariables>({ query: GetAddressesDocument, ...options });
+export function useAddressesQuery(options?: Omit<Urql.UseQueryArgs<IAddressesQueryVariables>, 'query'>) {
+  return Urql.useQuery<IAddressesQuery, IAddressesQueryVariables>({ query: AddressesDocument, ...options });
 };

@@ -207,6 +207,49 @@
         "possibleTypes": null
       },
       {
+        "kind": "OBJECT",
+        "name": "AddressList",
+        "description": null,
+        "fields": [
+          {
+            "name": "items",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Address",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "pageInfo",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "PageInfo",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "SCALAR",
         "name": "Boolean",
         "description": "The `Boolean` scalar type represents `true` or `false`.",
@@ -650,6 +693,45 @@
       },
       {
         "kind": "OBJECT",
+        "name": "PageInfo",
+        "description": null,
+        "fields": [
+          {
+            "name": "endCursor",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hasNextPage",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
         "name": "Product",
         "description": null,
         "fields": [
@@ -798,7 +880,7 @@
         "description": null,
         "fields": [
           {
-            "name": "getAddressById",
+            "name": "address",
             "description": null,
             "args": [
               {
@@ -823,21 +905,13 @@
             "deprecationReason": null
           },
           {
-            "name": "getAddresses",
+            "name": "addresses",
             "description": null,
             "args": [],
             "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "Address",
-                  "ofType": null
-                }
-              }
+              "kind": "OBJECT",
+              "name": "AddressList",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -888,7 +962,7 @@
             "deprecationReason": null
           },
           {
-            "name": "getUserById",
+            "name": "user",
             "description": null,
             "args": [
               {
@@ -913,7 +987,7 @@
             "deprecationReason": null
           },
           {
-            "name": "getUsers",
+            "name": "users",
             "description": null,
             "args": [],
             "type": {

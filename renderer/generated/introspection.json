@@ -91,6 +91,37 @@
       },
       {
         "kind": "OBJECT",
+        "name": "AddressList",
+        "fields": [
+          {
+            "name": "items",
+            "type": {
+              "kind": "LIST",
+              "ofType": {
+                "kind": "NON_NULL",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Address",
+                  "ofType": null
+                }
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "pageInfo",
+            "type": {
+              "kind": "OBJECT",
+              "name": "PageInfo",
+              "ofType": null
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
         "name": "Inventory",
         "fields": [
           {
@@ -340,6 +371,32 @@
       },
       {
         "kind": "OBJECT",
+        "name": "PageInfo",
+        "fields": [
+          {
+            "name": "endCursor",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          },
+          {
+            "name": "hasNextPage",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Any"
+              }
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
         "name": "Product",
         "fields": [
           {
@@ -414,7 +471,7 @@
         "name": "Query",
         "fields": [
           {
-            "name": "getAddressById",
+            "name": "address",
             "type": {
               "kind": "OBJECT",
               "name": "Address",
@@ -431,17 +488,11 @@
             ]
           },
           {
-            "name": "getAddresses",
+            "name": "addresses",
             "type": {
-              "kind": "LIST",
-              "ofType": {
-                "kind": "NON_NULL",
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "Address",
-                  "ofType": null
-                }
-              }
+              "kind": "OBJECT",
+              "name": "AddressList",
+              "ofType": null
             },
             "args": []
           },
@@ -478,7 +529,7 @@
             ]
           },
           {
-            "name": "getUserById",
+            "name": "user",
             "type": {
               "kind": "OBJECT",
               "name": "User",
@@ -495,7 +546,7 @@
             ]
           },
           {
-            "name": "getUsers",
+            "name": "users",
             "type": {
               "kind": "LIST",
               "ofType": {

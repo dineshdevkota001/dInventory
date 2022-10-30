@@ -1,11 +1,11 @@
 import { format } from 'date-fns';
 import Table from '@components/core/Table';
 import AddAddress from '@components/address/AddAddress';
-import { useGetAddressesQuery } from '@generated/graphql';
+import { useAddressesQuery } from '@generated/graphql';
 
 export default function Address() {
-  const [{ data }] = useGetAddressesQuery();
-  const address = data?.getAddresses ?? [];
+  const [{ data }] = useAddressesQuery();
+  const address = data?.addresses?.items ?? [];
 
   return (
     <Table

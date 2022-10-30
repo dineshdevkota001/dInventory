@@ -1,11 +1,12 @@
-import Alert from '@components/core/ConfirmDialog/Alert';
+import ButtonAlert from '@components/core/ConfirmDialog/ButtonAlert';
 import { AddHomeRounded } from '@mui/icons-material';
-import { Button, Dialog } from '@mui/material';
+import { Button } from '@mui/material';
 
 export default function AddAddress() {
   return (
-    <Alert
+    <ButtonAlert
       title="Hello"
+      description="This is just a test"
       button={<Button startIcon={<AddHomeRounded />}>Add New</Button>}
     />
   );
