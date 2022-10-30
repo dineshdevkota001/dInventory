@@ -1,43 +1,73 @@
 import { LoadingButton } from '@mui/lab';
-import { Button, ButtonGroup, ButtonProps, DialogContent } from '@mui/material';
+import { ButtonProps, DialogContent, useTheme } from '@mui/material';
+import { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 
 export interface IContentProps {
-  onCancel?: ButtonProps['onClick'];
   onConfirm?: ButtonProps['onClick'];
   confirmLoading?: boolean;
   confirmProps?: Partial<ButtonProps>;
-  cancelProps?: Partial<ButtonProps>;
 }
 
-export default function Content({
+export function Content({
   children,
-  onCancel,
   onConfirm,
   confirmLoading,
   confirmProps,
-  cancelProps,
 }: IContentProps & IHaveChildren) {
+  const theme = useTheme();
   return (
     <>
-      <DialogContent>{children}</DialogContent>
-      <ButtonGroup fullWidth>
-        <Button
-          color="error"
-          variant="text"
-          onClick={onCancel}
-          {...cancelProps}
-        >
-          Cancel
-        </Button>
-        <LoadingButton
-          variant="text"
-          onClick={onConfirm}
-          loading={confirmLoading}
-          {...confirmProps}
-        >
-          Confirm
-        </LoadingButton>
-      </ButtonGroup>
+      <DialogContent
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: theme.spacing(2),
+          mb: 1,
+        }}
+      >
+        {children}
+      </DialogContent>
+      <LoadingButton
+        variant="text"
+        onClick={onConfirm}
+        loading={confirmLoading}
+        fullWidth
+        size="large"
+        {...confirmProps}
+      >
+        Confirm
+      </LoadingButton>
     </>
+  );
+}
+
+type IFormProps = DetailedHTMLProps<
+  FormHTMLAttributes<HTMLFormElement>,
+  HTMLFormElement
+>;
+
+type IFormContentProps = IContentProps &
+  IHaveChildren & {
+    onSubmit: IFormProps['onSubmit'];
+    formProps?: IFormProps;
+    isSubmitting?: boolean;
+  };
+
+export function FormContent({
+  onSubmit,
+  formProps,
+  isSubmitting,
+  ...props
+}: IFormContentProps) {
+  return (
+    <form onSubmit={onSubmit} {...formProps}>
+      <Content
+        confirmProps={{
+          type: 'submit',
+        }}
+        confirmLoading={isSubmitting}
+        {...props}
+      />
+    </form>
   );
 }

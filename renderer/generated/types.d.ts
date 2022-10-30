@@ -211,6 +211,20 @@ type IRegularAddressFragment = { __typename?: 'Address', id: string, ward: numbe
 
 type IRegularPageInfoFragment = { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean };
 
+type ICreateAddressMutationVariables = Exact<{
+  data?: InputMaybe<IAddressCreateInput>;
+}>;
+
+
+type ICreateAddressMutation = { __typename?: 'Mutation', createAddress?: { __typename?: 'Address', id: string, ward: number, tole?: string | null, createdOn: any, country: string, city: string, district: string } | null };
+
+type IRemoveAddressMutationVariables = Exact<{
+  where: IIdWhereUniqueInput;
+}>;
+
+
+type IRemoveAddressMutation = { __typename?: 'Mutation', removeAddress?: { __typename?: 'Address', id: string, ward: number, tole?: string | null, createdOn: any, country: string, city: string, district: string } | null };
+
 type IAddressesQueryVariables = Exact<{ [key: string]: never; }>;
 
 

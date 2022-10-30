@@ -1,0 +1,11 @@
+mutation CreateAddress($data: AddressCreateInput) {
+  createAddress(data: $data) {
+    ...RegularAddress
+  }
+}
+
+mutation removeAddress($where: IdWhereUniqueInput!) {
+  removeAddress(where: $where) {
+    ...RegularAddress
+  }
+}

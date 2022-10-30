@@ -1,11 +1,11 @@
 import { cloneElement, ReactElement, useState } from 'react';
-import Alert, { IAlertProps } from './Alert';
+import { Alert, IAlertProps } from './Alert';
 
-type IButtonAlertProps = Omit<IAlertProps, 'open' | 'onClose'> & {
+export type IButtonAlertProps = Omit<IAlertProps, 'open' | 'onClose'> & {
   button: ReactElement<{ onClick: () => void }>;
 };
 
-export default function ButtonAlert({ button, ...props }: IButtonAlertProps) {
+export function ButtonAlert({ button, ...props }: IButtonAlertProps) {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => (button ? setOpen(true) : undefined);

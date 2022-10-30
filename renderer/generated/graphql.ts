@@ -18,6 +18,28 @@ export const RegularPageInfoFragmentDoc = gql`
   hasNextPage
 }
     `;
+export const CreateAddressDocument = gql`
+    mutation CreateAddress($data: AddressCreateInput) {
+  createAddress(data: $data) {
+    ...RegularAddress
+  }
+}
+    ${RegularAddressFragmentDoc}`;
+
+export function useCreateAddressMutation() {
+  return Urql.useMutation<ICreateAddressMutation, ICreateAddressMutationVariables>(CreateAddressDocument);
+};
+export const RemoveAddressDocument = gql`
+    mutation removeAddress($where: IdWhereUniqueInput!) {
+  removeAddress(where: $where) {
+    ...RegularAddress
+  }
+}
+    ${RegularAddressFragmentDoc}`;
+
+export function useRemoveAddressMutation() {
+  return Urql.useMutation<IRemoveAddressMutation, IRemoveAddressMutationVariables>(RemoveAddressDocument);
+};
 export const AddressesDocument = gql`
     query Addresses {
   addresses {

@@ -1,10 +1,17 @@
-import { Dialog, DialogProps, DialogTitle } from '@mui/material';
+import { CloseRounded } from '@mui/icons-material';
+import {
+  Dialog,
+  DialogProps,
+  DialogTitle,
+  IconButton,
+  Stack,
+} from '@mui/material';
 
 export type IRootProps = Partial<Pick<DialogProps, 'open' | 'onClose'>> & {
   title?: string;
 };
 
-export default function Root({
+export function Root({
   open,
   onClose,
   title,
@@ -12,7 +19,16 @@ export default function Root({
 }: IRootProps & IHaveChildren) {
   return (
     <Dialog {...{ open, onClose }} PaperProps={{ sx: { minWidth: 300 } }}>
-      <DialogTitle>{title}</DialogTitle>
+      <Stack direction="row" justifyContent="space-between" alignItems="start">
+        <DialogTitle>{title}</DialogTitle>
+        <IconButton
+          onClick={onClose as () => void}
+          sx={{ mr: 1.5, mt: 1.5 }}
+          size="small"
+        >
+          <CloseRounded color="inherit" />
+        </IconButton>
+      </Stack>
       {children}
     </Dialog>
   );
