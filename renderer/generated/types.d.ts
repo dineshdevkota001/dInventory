@@ -127,7 +127,7 @@ type IQuery = {
   getInventories?: Maybe<Array<IInventory>>;
   getInventoryById?: Maybe<IInventory>;
   user?: Maybe<IUser>;
-  users?: Maybe<Array<IUser>>;
+  users?: Maybe<IUserList>;
 };
 
 type IQueryAddressArgs = {
@@ -204,6 +204,12 @@ type IUserCreateInput = {
   phoneNumber?: InputMaybe<Scalars['String']>;
 };
 
+type IUserList = {
+  __typename?: 'UserList';
+  items?: Maybe<Array<IUser>>;
+  pageInfo?: Maybe<IPageInfo>;
+};
+
 type IRegularAddressFragment = {
   __typename?: 'Address';
   id: string;
@@ -215,10 +221,37 @@ type IRegularAddressFragment = {
   district: string;
 };
 
+type IMinimalAddressFragment = {
+  __typename?: 'Address';
+  id: string;
+  city: string;
+  tole?: string | null;
+};
+
 type IRegularPageInfoFragment = {
   __typename?: 'PageInfo';
   endCursor?: string | null;
   hasNextPage: boolean;
+};
+
+type IRegularUserFragment = {
+  __typename?: 'User';
+  id: string;
+  balance: number;
+  name: string;
+  email?: string | null;
+  institution: string;
+  description?: string | null;
+  address?: {
+    __typename?: 'Address';
+    id: string;
+    ward: number;
+    tole?: string | null;
+    createdOn: any;
+    country: string;
+    city: string;
+    district: string;
+  } | null;
 };
 
 type ICreateAddressMutationVariables = Exact<{
@@ -257,6 +290,60 @@ type IRemoveAddressMutation = {
   } | null;
 };
 
+type ICreateUserMutationVariables = Exact<{
+  data: IUserCreateInput;
+}>;
+
+type ICreateUserMutation = {
+  __typename?: 'Mutation';
+  createUser?: {
+    __typename?: 'User';
+    id: string;
+    balance: number;
+    name: string;
+    email?: string | null;
+    institution: string;
+    description?: string | null;
+    address?: {
+      __typename?: 'Address';
+      id: string;
+      ward: number;
+      tole?: string | null;
+      createdOn: any;
+      country: string;
+      city: string;
+      district: string;
+    } | null;
+  } | null;
+};
+
+type IRemoveUserMutationVariables = Exact<{
+  where: IIdWhereUniqueInput;
+}>;
+
+type IRemoveUserMutation = {
+  __typename?: 'Mutation';
+  removeUser?: {
+    __typename?: 'User';
+    id: string;
+    balance: number;
+    name: string;
+    email?: string | null;
+    institution: string;
+    description?: string | null;
+    address?: {
+      __typename?: 'Address';
+      id: string;
+      ward: number;
+      tole?: string | null;
+      createdOn: any;
+      country: string;
+      city: string;
+      district: string;
+    } | null;
+  } | null;
+};
+
 type IAddressesQueryVariables = Exact<{ [key: string]: never }>;
 
 type IAddressesQuery = {
@@ -278,5 +365,53 @@ type IAddressesQuery = {
       endCursor?: string | null;
       hasNextPage: boolean;
     } | null;
+  } | null;
+};
+
+type IMinimalAddressesQueryVariables = Exact<{ [key: string]: never }>;
+
+type IMinimalAddressesQuery = {
+  __typename?: 'Query';
+  addresses?: {
+    __typename?: 'AddressList';
+    items?: Array<{
+      __typename?: 'Address';
+      id: string;
+      city: string;
+      tole?: string | null;
+    }> | null;
+    pageInfo?: {
+      __typename?: 'PageInfo';
+      endCursor?: string | null;
+      hasNextPage: boolean;
+    } | null;
+  } | null;
+};
+
+type IUsersQueryVariables = Exact<{ [key: string]: never }>;
+
+type IUsersQuery = {
+  __typename?: 'Query';
+  users?: {
+    __typename?: 'UserList';
+    items?: Array<{
+      __typename?: 'User';
+      id: string;
+      balance: number;
+      name: string;
+      email?: string | null;
+      institution: string;
+      description?: string | null;
+      address?: {
+        __typename?: 'Address';
+        id: string;
+        ward: number;
+        tole?: string | null;
+        createdOn: any;
+        country: string;
+        city: string;
+        district: string;
+      } | null;
+    }> | null;
   } | null;
 };

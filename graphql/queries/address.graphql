@@ -1,0 +1,21 @@
+query Addresses {
+  addresses {
+    items {
+      ...RegularAddress
+    }
+    pageInfo {
+      ...RegularPageInfo
+    }
+  }
+}
+
+query MinimalAddresses {
+  addresses {
+    items {
+      ...MinimalAddress
+    }
+    pageInfo {
+      ...RegularPageInfo
+    }
+  }
+}

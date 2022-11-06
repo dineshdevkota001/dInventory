@@ -7,3 +7,8 @@ fragment RegularAddress on Address {
   city
   district
 }
+fragment MinimalAddress on Address {
+  id
+  city
+  tole
+}

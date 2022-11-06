@@ -1,6 +1,19 @@
 import gql from 'graphql-tag';
 import * as Urql from 'urql';
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+export const MinimalAddressFragmentDoc = gql`
+  fragment MinimalAddress on Address {
+    id
+    city
+    tole
+  }
+`;
+export const RegularPageInfoFragmentDoc = gql`
+  fragment RegularPageInfo on PageInfo {
+    endCursor
+    hasNextPage
+  }
+`;
 export const RegularAddressFragmentDoc = gql`
   fragment RegularAddress on Address {
     id
@@ -12,11 +25,19 @@ export const RegularAddressFragmentDoc = gql`
     district
   }
 `;
-export const RegularPageInfoFragmentDoc = gql`
-  fragment RegularPageInfo on PageInfo {
-    endCursor
-    hasNextPage
+export const RegularUserFragmentDoc = gql`
+  fragment RegularUser on User {
+    id
+    address {
+      ...RegularAddress
+    }
+    balance
+    name
+    email
+    institution
+    description
   }
+  ${RegularAddressFragmentDoc}
 `;
 export const CreateAddressDocument = gql`
   mutation CreateAddress($data: AddressCreateInput) {
@@ -48,6 +69,34 @@ export function useRemoveAddressMutation() {
     IRemoveAddressMutationVariables
   >(RemoveAddressDocument);
 }
+export const CreateUserDocument = gql`
+  mutation CreateUser($data: UserCreateInput!) {
+    createUser(data: $data) {
+      ...RegularUser
+    }
+  }
+  ${RegularUserFragmentDoc}
+`;
+
+export function useCreateUserMutation() {
+  return Urql.useMutation<ICreateUserMutation, ICreateUserMutationVariables>(
+    CreateUserDocument,
+  );
+}
+export const RemoveUserDocument = gql`
+  mutation removeUser($where: IdWhereUniqueInput!) {
+    removeUser(where: $where) {
+      ...RegularUser
+    }
+  }
+  ${RegularUserFragmentDoc}
+`;
+
+export function useRemoveUserMutation() {
+  return Urql.useMutation<IRemoveUserMutation, IRemoveUserMutationVariables>(
+    RemoveUserDocument,
+  );
+}
 export const AddressesDocument = gql`
   query Addresses {
     addresses {
@@ -68,6 +117,47 @@ export function useAddressesQuery(
 ) {
   return Urql.useQuery<IAddressesQuery, IAddressesQueryVariables>({
     query: AddressesDocument,
+    ...options,
+  });
+}
+export const MinimalAddressesDocument = gql`
+  query MinimalAddresses {
+    addresses {
+      items {
+        ...MinimalAddress
+      }
+      pageInfo {
+        ...RegularPageInfo
+      }
+    }
+  }
+  ${MinimalAddressFragmentDoc}
+  ${RegularPageInfoFragmentDoc}
+`;
+
+export function useMinimalAddressesQuery(
+  options?: Omit<Urql.UseQueryArgs<IMinimalAddressesQueryVariables>, 'query'>,
+) {
+  return Urql.useQuery<IMinimalAddressesQuery, IMinimalAddressesQueryVariables>(
+    { query: MinimalAddressesDocument, ...options },
+  );
+}
+export const UsersDocument = gql`
+  query Users {
+    users {
+      items {
+        ...RegularUser
+      }
+    }
+  }
+  ${RegularUserFragmentDoc}
+`;
+
+export function useUsersQuery(
+  options?: Omit<Urql.UseQueryArgs<IUsersQueryVariables>, 'query'>,
+) {
+  return Urql.useQuery<IUsersQuery, IUsersQueryVariables>({
+    query: UsersDocument,
     ...options,
   });
 }

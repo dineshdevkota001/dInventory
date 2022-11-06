@@ -1,0 +1,11 @@
+mutation CreateUser($data: UserCreateInput!) {
+  createUser(data: $data) {
+    ...RegularUser
+  }
+}
+
+mutation removeUser($where: IdWhereUniqueInput!) {
+  removeUser(where: $where) {
+    ...RegularUser
+  }
+}

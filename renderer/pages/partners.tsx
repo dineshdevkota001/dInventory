@@ -1,13 +1,15 @@
 import Table from '@components/core/Table';
-import AddPartner from '@components/partner/AddPartner';
+import AddUser from '@components/user/AddUser';
+import { useUsersQuery } from '@generated/graphql';
 
-export default function Partners() {
-  const address = [];
+export default function Users() {
+  const [{ data }] = useUsersQuery();
+  const users = data?.users?.items;
 
   return (
     <Table
-      data={address}
-      renderTopToolbarCustomActions={AddPartner}
+      data={users ?? []}
+      renderTopToolbarCustomActions={AddUser}
       columns={[
         {
           header: 'Name',
@@ -24,12 +26,12 @@ export default function Partners() {
 
         {
           header: 'Contact',
-          accessorFn: ({ email, phone }) =>
-            `${email ?? ''}${email ? ', ' : ''}${phone}`,
+          accessorFn: ({ email }) => `${email ?? ''}${email ? ', ' : 'N/A'}`,
         },
         {
           header: 'Address',
-          accessorFn: row => `${row.city} ${row.ward_no}, ${row.tole}`,
+          accessorFn: row =>
+            `${row?.address?.city} ${row?.address?.ward}, ${row?.address?.tole}`,
         },
         {
           header: 'Description',
