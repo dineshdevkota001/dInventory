@@ -9,8 +9,8 @@ export default function Title({ title }: ITitleProps) {
   return (
     <Head>
       <title>
-        {APP_NAME}
-        {title ? ` ${'\u00B7'} ${title}` : ''}
+        {`${APP_NAME}
+        ${title ? ` ${'\u00B7'} ${title}` : ''}`}
       </title>
     </Head>
   );

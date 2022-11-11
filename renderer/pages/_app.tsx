@@ -10,7 +10,7 @@ import Layout from '@components/Layout';
 import DarkModePrefsProvider from '@contexts/DarkModePrefs';
 import LanguageProvider from '@contexts/LanguageContext';
 import client from '@utils/urql';
-import 'index.css';
+import '../index.css';
 
 const isBrowser = typeof document !== 'undefined';
 

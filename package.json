@@ -7,6 +7,7 @@
   "main": "app/background.js",
   "scripts": {
     "dev": "nextron",
+    "dev:web": "next dev ./renderer",
     "build": "nextron build",
     "postinstall": "electron-builder install-app-deps",
     "codegen": "graphql-codegen --config graphql-codegen.ts"
