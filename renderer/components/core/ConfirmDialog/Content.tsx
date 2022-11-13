@@ -6,6 +6,7 @@ export interface IContentProps {
   onConfirm?: ButtonProps['onClick'];
   confirmLoading?: boolean;
   confirmProps?: Partial<ButtonProps>;
+  confirmLabel?: string;
 }
 
 export function Content({
@@ -13,6 +14,7 @@ export function Content({
   onConfirm,
   confirmLoading,
   confirmProps,
+  confirmLabel = 'Confirm',
 }: IContentProps & IHaveChildren) {
   const theme = useTheme();
   return (
@@ -35,7 +37,7 @@ export function Content({
         size="large"
         {...confirmProps}
       >
-        Confirm
+        {confirmLabel}
       </LoadingButton>
     </>
   );

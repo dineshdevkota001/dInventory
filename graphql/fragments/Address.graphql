@@ -1,3 +1,9 @@
+fragment MinimalAddress on Address {
+  id
+  city
+  tole
+}
+
 fragment RegularAddress on Address {
   id
   ward
@@ -6,9 +12,4 @@ fragment RegularAddress on Address {
   country
   city
   district
-}
-fragment MinimalAddress on Address {
-  id
-  city
-  tole
 }

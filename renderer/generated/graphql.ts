@@ -142,6 +142,23 @@ export function useMinimalAddressesQuery(
     { query: MinimalAddressesDocument, ...options },
   );
 }
+export const AddressDocument = gql`
+  query Address($where: IdWhereUniqueInput) {
+    address(where: $where) {
+      ...RegularAddress
+    }
+  }
+  ${RegularAddressFragmentDoc}
+`;
+
+export function useAddressQuery(
+  options?: Omit<Urql.UseQueryArgs<IAddressQueryVariables>, 'query'>,
+) {
+  return Urql.useQuery<IAddressQuery, IAddressQueryVariables>({
+    query: AddressDocument,
+    ...options,
+  });
+}
 export const UsersDocument = gql`
   query Users {
     users {

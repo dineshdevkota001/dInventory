@@ -19,3 +19,9 @@ query MinimalAddresses {
     }
   }
 }
+
+query Address($where: IdWhereUniqueInput) {
+  address(where: $where) {
+    ...RegularAddress
+  }
+}

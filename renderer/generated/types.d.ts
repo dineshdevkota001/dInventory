@@ -210,6 +210,13 @@ type IUserList = {
   pageInfo?: Maybe<IPageInfo>;
 };
 
+type IMinimalAddressFragment = {
+  __typename?: 'Address';
+  id: string;
+  city: string;
+  tole?: string | null;
+};
+
 type IRegularAddressFragment = {
   __typename?: 'Address';
   id: string;
@@ -219,13 +226,6 @@ type IRegularAddressFragment = {
   country: string;
   city: string;
   district: string;
-};
-
-type IMinimalAddressFragment = {
-  __typename?: 'Address';
-  id: string;
-  city: string;
-  tole?: string | null;
 };
 
 type IRegularPageInfoFragment = {
@@ -385,6 +385,24 @@ type IMinimalAddressesQuery = {
       endCursor?: string | null;
       hasNextPage: boolean;
     } | null;
+  } | null;
+};
+
+type IAddressQueryVariables = Exact<{
+  where?: InputMaybe<IIdWhereUniqueInput>;
+}>;
+
+type IAddressQuery = {
+  __typename?: 'Query';
+  address?: {
+    __typename?: 'Address';
+    id: string;
+    ward: number;
+    tole?: string | null;
+    createdOn: any;
+    country: string;
+    city: string;
+    district: string;
   } | null;
 };
 
