@@ -12,6 +12,7 @@ interface IListProps<T> extends IHaveChildren {
   data: T[];
   getLabel: (item: T) => string | JSX.Element;
   baseUrl: string;
+  selectedId?: string;
 }
 
 export default function List<T extends { id: string }>({
@@ -19,6 +20,7 @@ export default function List<T extends { id: string }>({
   getLabel,
   children,
   baseUrl = '.',
+  selectedId: id,
 }: IListProps<T>) {
   const theme = useTheme();
   return (
@@ -34,7 +36,7 @@ export default function List<T extends { id: string }>({
       <MuiList sx={{ flexGrow: 1 }}>
         {data?.map(item => (
           <Link key={item?.id} href={`${baseUrl}${item.id}`} passHref>
-            <ListItemButton sx={{ marginRight: 1 }}>
+            <ListItemButton sx={{ marginRight: 1 }} selected={id === item.id}>
               <ListItemText>
                 {getLabel?.(item) ?? JSON.stringify(item)}
               </ListItemText>

@@ -433,3 +433,30 @@ type IUsersQuery = {
     }> | null;
   } | null;
 };
+
+type IUserQueryVariables = Exact<{
+  where?: InputMaybe<IIdWhereUniqueInput>;
+}>;
+
+type IUserQuery = {
+  __typename?: 'Query';
+  user?: {
+    __typename?: 'User';
+    id: string;
+    balance: number;
+    name: string;
+    email?: string | null;
+    institution: string;
+    description?: string | null;
+    address?: {
+      __typename?: 'Address';
+      id: string;
+      ward: number;
+      tole?: string | null;
+      createdOn: any;
+      country: string;
+      city: string;
+      district: string;
+    } | null;
+  } | null;
+};

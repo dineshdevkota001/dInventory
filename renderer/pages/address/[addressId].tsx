@@ -11,7 +11,7 @@ export default function AddressPane() {
   const [{ data }] = useMinimalAddressesQuery();
   const addresses = data?.addresses?.items;
 
-  const id = query.id as string;
+  const id = query.addressId as string;
 
   return (
     <Stack direction="row" height={1}>
@@ -19,6 +19,7 @@ export default function AddressPane() {
         data={addresses}
         getLabel={({ tole, city }) => `${tole}, ${city}`}
         baseUrl={ADDRESS}
+        selectedId={id}
       >
         <AddAddress />
       </List>

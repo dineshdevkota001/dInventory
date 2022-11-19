@@ -4,7 +4,7 @@ mutation CreateUser($data: UserCreateInput!) {
   }
 }
 
-mutation removeUser($where: IdWhereUniqueInput!) {
+mutation RemoveUser($where: IdWhereUniqueInput!) {
   removeUser(where: $where) {
     ...RegularUser
   }

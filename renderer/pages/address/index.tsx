@@ -1,3 +1,3 @@
-import Address from './[id]';
+import Address from './[addressId]';
 
 export default Address;

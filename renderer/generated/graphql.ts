@@ -178,3 +178,20 @@ export function useUsersQuery(
     ...options,
   });
 }
+export const UserDocument = gql`
+  query User($where: IdWhereUniqueInput) {
+    user(where: $where) {
+      ...RegularUser
+    }
+  }
+  ${RegularUserFragmentDoc}
+`;
+
+export function useUserQuery(
+  options?: Omit<Urql.UseQueryArgs<IUserQueryVariables>, 'query'>,
+) {
+  return Urql.useQuery<IUserQuery, IUserQueryVariables>({
+    query: UserDocument,
+    ...options,
+  });
+}

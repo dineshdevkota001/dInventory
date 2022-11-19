@@ -5,3 +5,9 @@ query Users {
     }
   }
 }
+
+query User($where: IdWhereUniqueInput) {
+  user(where: $where) {
+    ...RegularUser
+  }
+}

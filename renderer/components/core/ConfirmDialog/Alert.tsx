@@ -1,4 +1,5 @@
 import { DialogContentText } from '@mui/material';
+import { MouseEvent } from 'react';
 import { Content, IContentProps } from './Content';
 import { IRootProps, Root } from './Root';
 
@@ -14,10 +15,14 @@ export function Alert({
   description,
   ...props
 }: IAlertProps) {
+  const onConfirmWrapper = async () => {
+    await onConfirm?.({} as MouseEvent<HTMLButtonElement>);
+    onClose?.({}, 'backdropClick');
+  };
   return (
     <Root {...{ open, onClose, title }}>
       {children ?? (
-        <Content onConfirm={onConfirm} {...props}>
+        <Content onConfirm={onConfirmWrapper} {...props}>
           <DialogContentText>{description}</DialogContentText>
         </Content>
       )}
