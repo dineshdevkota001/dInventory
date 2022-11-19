@@ -84,7 +84,7 @@ export function useCreateUserMutation() {
   );
 }
 export const RemoveUserDocument = gql`
-  mutation removeUser($where: IdWhereUniqueInput!) {
+  mutation RemoveUser($where: IdWhereUniqueInput!) {
     removeUser(where: $where) {
       ...RegularUser
     }

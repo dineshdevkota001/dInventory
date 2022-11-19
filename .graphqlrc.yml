@@ -1,2 +1,2 @@
 schema: ./renderer/generated/schema.json
-documents: ./graphql/**/*.graphql
+documents: ./renderer/graphql/**/*.graphql

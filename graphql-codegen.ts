@@ -4,7 +4,7 @@ const config: CodegenConfig = {
   overwrite: true,
   hooks: { afterAllFileWrite: ['prettier --write ./renderer/generated/'] },
   schema: 'http://localhost:4000/graphql',
-  documents: 'graphql/**/*.graphql',
+  documents: 'renderer/graphql/**/*.graphql',
   generates: {
     'renderer/generated/schema.json': {
       plugins: ['introspection'],
