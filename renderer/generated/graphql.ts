@@ -8,6 +8,13 @@ export const MinimalAddressFragmentDoc = gql`
     tole
   }
 `;
+export const RegularInventoryFragmentDoc = gql`
+  fragment RegularInventory on Inventory {
+    id
+    name
+    description
+  }
+`;
 export const RegularPageInfoFragmentDoc = gql`
   fragment RegularPageInfo on PageInfo {
     endCursor
@@ -40,7 +47,7 @@ export const RegularUserFragmentDoc = gql`
   ${RegularAddressFragmentDoc}
 `;
 export const CreateAddressDocument = gql`
-  mutation CreateAddress($data: AddressCreateInput) {
+  mutation CreateAddress($data: AddressCreateInput!) {
     createAddress(data: $data) {
       ...RegularAddress
     }
@@ -53,21 +60,6 @@ export function useCreateAddressMutation() {
     ICreateAddressMutation,
     ICreateAddressMutationVariables
   >(CreateAddressDocument);
-}
-export const RemoveAddressDocument = gql`
-  mutation removeAddress($where: IdWhereUniqueInput!) {
-    removeAddress(where: $where) {
-      ...RegularAddress
-    }
-  }
-  ${RegularAddressFragmentDoc}
-`;
-
-export function useRemoveAddressMutation() {
-  return Urql.useMutation<
-    IRemoveAddressMutation,
-    IRemoveAddressMutationVariables
-  >(RemoveAddressDocument);
 }
 export const CreateUserDocument = gql`
   mutation CreateUser($data: UserCreateInput!) {
@@ -83,19 +75,64 @@ export function useCreateUserMutation() {
     CreateUserDocument,
   );
 }
-export const RemoveUserDocument = gql`
-  mutation RemoveUser($where: IdWhereUniqueInput!) {
-    removeUser(where: $where) {
+export const CreateInventoryDocument = gql`
+  mutation CreateInventory($data: InventoryCreateInput!) {
+    createInventory(data: $data) {
+      ...RegularInventory
+    }
+  }
+  ${RegularInventoryFragmentDoc}
+`;
+
+export function useCreateInventoryMutation() {
+  return Urql.useMutation<
+    ICreateInventoryMutation,
+    ICreateInventoryMutationVariables
+  >(CreateInventoryDocument);
+}
+export const DeleteAddressDocument = gql`
+  mutation DeleteAddress($where: AddressWhereUniqueInput!) {
+    deleteAddress(where: $where) {
+      ...RegularAddress
+    }
+  }
+  ${RegularAddressFragmentDoc}
+`;
+
+export function useDeleteAddressMutation() {
+  return Urql.useMutation<
+    IDeleteAddressMutation,
+    IDeleteAddressMutationVariables
+  >(DeleteAddressDocument);
+}
+export const DeleteUserDocument = gql`
+  mutation DeleteUser($where: UserWhereUniqueInput!) {
+    deleteUser(where: $where) {
       ...RegularUser
     }
   }
   ${RegularUserFragmentDoc}
 `;
 
-export function useRemoveUserMutation() {
-  return Urql.useMutation<IRemoveUserMutation, IRemoveUserMutationVariables>(
-    RemoveUserDocument,
+export function useDeleteUserMutation() {
+  return Urql.useMutation<IDeleteUserMutation, IDeleteUserMutationVariables>(
+    DeleteUserDocument,
   );
+}
+export const DeleteInventoryDocument = gql`
+  mutation DeleteInventory($where: InventoryWhereUniqueInput!) {
+    deleteInventory(where: $where) {
+      ...RegularInventory
+    }
+  }
+  ${RegularInventoryFragmentDoc}
+`;
+
+export function useDeleteInventoryMutation() {
+  return Urql.useMutation<
+    IDeleteInventoryMutation,
+    IDeleteInventoryMutationVariables
+  >(DeleteInventoryDocument);
 }
 export const AddressesDocument = gql`
   query Addresses {
@@ -117,6 +154,52 @@ export function useAddressesQuery(
 ) {
   return Urql.useQuery<IAddressesQuery, IAddressesQueryVariables>({
     query: AddressesDocument,
+    ...options,
+  });
+}
+export const UsersDocument = gql`
+  query Users {
+    users {
+      items {
+        ...RegularUser
+      }
+      pageInfo {
+        ...RegularPageInfo
+      }
+    }
+  }
+  ${RegularUserFragmentDoc}
+  ${RegularPageInfoFragmentDoc}
+`;
+
+export function useUsersQuery(
+  options?: Omit<Urql.UseQueryArgs<IUsersQueryVariables>, 'query'>,
+) {
+  return Urql.useQuery<IUsersQuery, IUsersQueryVariables>({
+    query: UsersDocument,
+    ...options,
+  });
+}
+export const InventoriesDocument = gql`
+  query Inventories {
+    inventories {
+      items {
+        ...RegularInventory
+      }
+      pageInfo {
+        ...RegularPageInfo
+      }
+    }
+  }
+  ${RegularInventoryFragmentDoc}
+  ${RegularPageInfoFragmentDoc}
+`;
+
+export function useInventoriesQuery(
+  options?: Omit<Urql.UseQueryArgs<IInventoriesQueryVariables>, 'query'>,
+) {
+  return Urql.useQuery<IInventoriesQuery, IInventoriesQueryVariables>({
+    query: InventoriesDocument,
     ...options,
   });
 }
@@ -142,8 +225,25 @@ export function useMinimalAddressesQuery(
     { query: MinimalAddressesDocument, ...options },
   );
 }
+export const UserDocument = gql`
+  query User($where: UserWhereUniqueInput) {
+    user(where: $where) {
+      ...RegularUser
+    }
+  }
+  ${RegularUserFragmentDoc}
+`;
+
+export function useUserQuery(
+  options?: Omit<Urql.UseQueryArgs<IUserQueryVariables>, 'query'>,
+) {
+  return Urql.useQuery<IUserQuery, IUserQueryVariables>({
+    query: UserDocument,
+    ...options,
+  });
+}
 export const AddressDocument = gql`
-  query Address($where: IdWhereUniqueInput) {
+  query Address($where: AddressWhereUniqueInput) {
     address(where: $where) {
       ...RegularAddress
     }
@@ -159,39 +259,20 @@ export function useAddressQuery(
     ...options,
   });
 }
-export const UsersDocument = gql`
-  query Users {
-    users {
-      items {
-        ...RegularUser
-      }
+export const InventoryDocument = gql`
+  query Inventory($where: InventoryWhereUniqueInput) {
+    inventory(where: $where) {
+      ...RegularInventory
     }
   }
-  ${RegularUserFragmentDoc}
+  ${RegularInventoryFragmentDoc}
 `;
 
-export function useUsersQuery(
-  options?: Omit<Urql.UseQueryArgs<IUsersQueryVariables>, 'query'>,
+export function useInventoryQuery(
+  options?: Omit<Urql.UseQueryArgs<IInventoryQueryVariables>, 'query'>,
 ) {
-  return Urql.useQuery<IUsersQuery, IUsersQueryVariables>({
-    query: UsersDocument,
-    ...options,
-  });
-}
-export const UserDocument = gql`
-  query User($where: IdWhereUniqueInput) {
-    user(where: $where) {
-      ...RegularUser
-    }
-  }
-  ${RegularUserFragmentDoc}
-`;
-
-export function useUserQuery(
-  options?: Omit<Urql.UseQueryArgs<IUserQueryVariables>, 'query'>,
-) {
-  return Urql.useQuery<IUserQuery, IUserQueryVariables>({
-    query: UserDocument,
+  return Urql.useQuery<IInventoryQuery, IInventoryQueryVariables>({
+    query: InventoryDocument,
     ...options,
   });
 }

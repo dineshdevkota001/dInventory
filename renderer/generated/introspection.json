@@ -174,6 +174,37 @@
       },
       {
         "kind": "OBJECT",
+        "name": "InventoryList",
+        "fields": [
+          {
+            "name": "items",
+            "type": {
+              "kind": "LIST",
+              "ofType": {
+                "kind": "NON_NULL",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Inventory",
+                  "ofType": null
+                }
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "pageInfo",
+            "type": {
+              "kind": "OBJECT",
+              "name": "PageInfo",
+              "ofType": null
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
         "name": "Item",
         "fields": [
           {
@@ -307,6 +338,26 @@
             ]
           },
           {
+            "name": "createInventory",
+            "type": {
+              "kind": "OBJECT",
+              "name": "Inventory",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "data",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Any"
+                  }
+                }
+              }
+            ]
+          },
+          {
             "name": "createUser",
             "type": {
               "kind": "OBJECT",
@@ -327,7 +378,7 @@
             ]
           },
           {
-            "name": "removeAddress",
+            "name": "deleteAddress",
             "type": {
               "kind": "OBJECT",
               "name": "Address",
@@ -347,7 +398,27 @@
             ]
           },
           {
-            "name": "removeUser",
+            "name": "deleteInventory",
+            "type": {
+              "kind": "OBJECT",
+              "name": "Inventory",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "where",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Any"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "deleteUser",
             "type": {
               "kind": "OBJECT",
               "name": "User",
@@ -494,25 +565,49 @@
               "name": "AddressList",
               "ofType": null
             },
-            "args": []
-          },
-          {
-            "name": "getInventories",
-            "type": {
-              "kind": "LIST",
-              "ofType": {
-                "kind": "NON_NULL",
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "Inventory",
-                  "ofType": null
+            "args": [
+              {
+                "name": "after",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              },
+              {
+                "name": "first",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
                 }
               }
-            },
-            "args": []
+            ]
           },
           {
-            "name": "getInventoryById",
+            "name": "inventories",
+            "type": {
+              "kind": "OBJECT",
+              "name": "InventoryList",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "after",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              },
+              {
+                "name": "first",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              }
+            ]
+          },
+          {
+            "name": "inventory",
             "type": {
               "kind": "OBJECT",
               "name": "Inventory",
@@ -552,7 +647,22 @@
               "name": "UserList",
               "ofType": null
             },
-            "args": []
+            "args": [
+              {
+                "name": "after",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              },
+              {
+                "name": "first",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              }
+            ]
           }
         ],
         "interfaces": []

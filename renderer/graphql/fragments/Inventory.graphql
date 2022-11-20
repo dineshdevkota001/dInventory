@@ -1,0 +1,5 @@
+fragment RegularInventory on Inventory {
+  id
+  name
+  description
+}

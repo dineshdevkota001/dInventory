@@ -1,0 +1,17 @@
+mutation DeleteAddress($where: AddressWhereUniqueInput!) {
+  deleteAddress(where: $where) {
+    ...RegularAddress
+  }
+}
+
+mutation DeleteUser($where: UserWhereUniqueInput!) {
+  deleteUser(where: $where) {
+    ...RegularUser
+  }
+}
+
+mutation DeleteInventory($where: InventoryWhereUniqueInput!) {
+  deleteInventory(where: $where) {
+    ...RegularInventory
+  }
+}

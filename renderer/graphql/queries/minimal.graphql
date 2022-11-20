@@ -1,0 +1,10 @@
+query MinimalAddresses {
+  addresses {
+    items {
+      ...MinimalAddress
+    }
+    pageInfo {
+      ...RegularPageInfo
+    }
+  }
+}

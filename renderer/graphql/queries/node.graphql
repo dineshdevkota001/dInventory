@@ -1,0 +1,17 @@
+query User($where: UserWhereUniqueInput) {
+  user(where: $where) {
+    ...RegularUser
+  }
+}
+
+query Address($where: AddressWhereUniqueInput) {
+  address(where: $where) {
+    ...RegularAddress
+  }
+}
+
+query Inventory($where: InventoryWhereUniqueInput) {
+  inventory(where: $where) {
+    ...RegularInventory
+  }
+}

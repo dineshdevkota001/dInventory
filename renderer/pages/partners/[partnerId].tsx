@@ -1,5 +1,5 @@
 import List from '@components/common/List';
-import AddUser from '@components/user/AddUser';
+import { AddUser } from '@components/Create';
 import UserDetails from '@components/user/UserDetail';
 import { PARTNERS } from '@constants/static/routes';
 import { useUsersQuery } from '@generated/graphql';

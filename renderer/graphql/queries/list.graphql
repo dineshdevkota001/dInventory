@@ -9,10 +9,10 @@ query Addresses {
   }
 }
 
-query MinimalAddresses {
-  addresses {
+query Users {
+  users {
     items {
-      ...MinimalAddress
+      ...RegularUser
     }
     pageInfo {
       ...RegularPageInfo
@@ -20,8 +20,13 @@ query MinimalAddresses {
   }
 }
 
-query Address($where: IdWhereUniqueInput) {
-  address(where: $where) {
-    ...RegularAddress
+query Inventories {
+  inventories {
+    items {
+      ...RegularInventory
+    }
+    pageInfo {
+      ...RegularPageInfo
+    }
   }
 }

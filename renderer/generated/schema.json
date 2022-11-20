@@ -250,6 +250,33 @@
         "possibleTypes": null
       },
       {
+        "kind": "INPUT_OBJECT",
+        "name": "AddressWhereUniqueInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "SCALAR",
         "name": "Boolean",
         "description": "The `Boolean` scalar type represents `true` or `false`.",
@@ -285,33 +312,6 @@
         "description": "The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `\"4\"`) or integer (such as `4`) input value will be accepted as an ID.",
         "fields": null,
         "inputFields": null,
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "IdWhereUniqueInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
         "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
@@ -398,6 +398,115 @@
         ],
         "inputFields": null,
         "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "InventoryCreateInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "description",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "name",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "InventoryList",
+        "description": null,
+        "fields": [
+          {
+            "name": "items",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Inventory",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "pageInfo",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "PageInfo",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "InventoryWhereUniqueInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -599,6 +708,35 @@
             "deprecationReason": null
           },
           {
+            "name": "createInventory",
+            "description": null,
+            "args": [
+              {
+                "name": "data",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "InventoryCreateInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Inventory",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "createUser",
             "description": null,
             "args": [
@@ -628,7 +766,7 @@
             "deprecationReason": null
           },
           {
-            "name": "removeAddress",
+            "name": "deleteAddress",
             "description": null,
             "args": [
               {
@@ -639,7 +777,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "IdWhereUniqueInput",
+                    "name": "AddressWhereUniqueInput",
                     "ofType": null
                   }
                 },
@@ -657,7 +795,7 @@
             "deprecationReason": null
           },
           {
-            "name": "removeUser",
+            "name": "deleteInventory",
             "description": null,
             "args": [
               {
@@ -668,7 +806,36 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "IdWhereUniqueInput",
+                    "name": "InventoryWhereUniqueInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Inventory",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "deleteUser",
+            "description": null,
+            "args": [
+              {
+                "name": "where",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "UserWhereUniqueInput",
                     "ofType": null
                   }
                 },
@@ -888,7 +1055,7 @@
                 "description": null,
                 "type": {
                   "kind": "INPUT_OBJECT",
-                  "name": "IdWhereUniqueInput",
+                  "name": "AddressWhereUniqueInput",
                   "ofType": null
                 },
                 "defaultValue": null,
@@ -907,7 +1074,32 @@
           {
             "name": "addresses",
             "description": null,
-            "args": [],
+            "args": [
+              {
+                "name": "after",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "first",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
             "type": {
               "kind": "OBJECT",
               "name": "AddressList",
@@ -917,27 +1109,44 @@
             "deprecationReason": null
           },
           {
-            "name": "getInventories",
+            "name": "inventories",
             "description": null,
-            "args": [],
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "Inventory",
+            "args": [
+              {
+                "name": "after",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
                   "ofType": null
-                }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "first",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
               }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "InventoryList",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "getInventoryById",
+            "name": "inventory",
             "description": null,
             "args": [
               {
@@ -945,7 +1154,7 @@
                 "description": null,
                 "type": {
                   "kind": "INPUT_OBJECT",
-                  "name": "IdWhereUniqueInput",
+                  "name": "InventoryWhereUniqueInput",
                   "ofType": null
                 },
                 "defaultValue": null,
@@ -970,7 +1179,7 @@
                 "description": null,
                 "type": {
                   "kind": "INPUT_OBJECT",
-                  "name": "IdWhereUniqueInput",
+                  "name": "UserWhereUniqueInput",
                   "ofType": null
                 },
                 "defaultValue": null,
@@ -989,7 +1198,32 @@
           {
             "name": "users",
             "description": null,
-            "args": [],
+            "args": [
+              {
+                "name": "after",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "first",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
             "type": {
               "kind": "OBJECT",
               "name": "UserList",
@@ -1598,6 +1832,33 @@
         ],
         "inputFields": null,
         "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "UserWhereUniqueInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },

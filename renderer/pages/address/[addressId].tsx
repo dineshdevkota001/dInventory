@@ -1,6 +1,6 @@
-import AddAddress from '@components/address/AddAddress';
 import AddressDetails from '@components/address/AddressDetail';
 import List from '@components/common/List';
+import { AddAddress } from '@components/Create';
 import { ADDRESS } from '@constants/static/routes';
 import { useMinimalAddressesQuery } from '@generated/graphql';
 import { Stack } from '@mui/material';

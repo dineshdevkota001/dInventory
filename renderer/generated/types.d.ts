@@ -43,7 +43,7 @@ type IAddressList = {
   pageInfo?: Maybe<IPageInfo>;
 };
 
-type IIdWhereUniqueInput = {
+type IAddressWhereUniqueInput = {
   id: Scalars['String'];
 };
 
@@ -53,6 +53,21 @@ type IInventory = {
   id: Scalars['ID'];
   items?: Maybe<Array<IItem>>;
   name: Scalars['String'];
+};
+
+type IInventoryCreateInput = {
+  description?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
+};
+
+type IInventoryList = {
+  __typename?: 'InventoryList';
+  items?: Maybe<Array<IInventory>>;
+  pageInfo?: Maybe<IPageInfo>;
+};
+
+type IInventoryWhereUniqueInput = {
+  id: Scalars['String'];
 };
 
 type IItem = {
@@ -75,25 +90,35 @@ type IItem = {
 type IMutation = {
   __typename?: 'Mutation';
   createAddress?: Maybe<IAddress>;
+  createInventory?: Maybe<IInventory>;
   createUser?: Maybe<IUser>;
-  removeAddress?: Maybe<IAddress>;
-  removeUser?: Maybe<IUser>;
+  deleteAddress?: Maybe<IAddress>;
+  deleteInventory?: Maybe<IInventory>;
+  deleteUser?: Maybe<IUser>;
 };
 
 type IMutationCreateAddressArgs = {
   data?: InputMaybe<IAddressCreateInput>;
 };
 
+type IMutationCreateInventoryArgs = {
+  data: IInventoryCreateInput;
+};
+
 type IMutationCreateUserArgs = {
   data: IUserCreateInput;
 };
 
-type IMutationRemoveAddressArgs = {
-  where: IIdWhereUniqueInput;
+type IMutationDeleteAddressArgs = {
+  where: IAddressWhereUniqueInput;
 };
 
-type IMutationRemoveUserArgs = {
-  where: IIdWhereUniqueInput;
+type IMutationDeleteInventoryArgs = {
+  where: IInventoryWhereUniqueInput;
+};
+
+type IMutationDeleteUserArgs = {
+  where: IUserWhereUniqueInput;
 };
 
 type IPageInfo = {
@@ -124,22 +149,37 @@ type IQuery = {
   __typename?: 'Query';
   address?: Maybe<IAddress>;
   addresses?: Maybe<IAddressList>;
-  getInventories?: Maybe<Array<IInventory>>;
-  getInventoryById?: Maybe<IInventory>;
+  inventories?: Maybe<IInventoryList>;
+  inventory?: Maybe<IInventory>;
   user?: Maybe<IUser>;
   users?: Maybe<IUserList>;
 };
 
 type IQueryAddressArgs = {
-  where?: InputMaybe<IIdWhereUniqueInput>;
+  where?: InputMaybe<IAddressWhereUniqueInput>;
 };
 
-type IQueryGetInventoryByIdArgs = {
-  where?: InputMaybe<IIdWhereUniqueInput>;
+type IQueryAddressesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+};
+
+type IQueryInventoriesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+};
+
+type IQueryInventoryArgs = {
+  where?: InputMaybe<IInventoryWhereUniqueInput>;
 };
 
 type IQueryUserArgs = {
-  where?: InputMaybe<IIdWhereUniqueInput>;
+  where?: InputMaybe<IUserWhereUniqueInput>;
+};
+
+type IQueryUsersArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
 };
 
 type ITransaction = {
@@ -210,6 +250,10 @@ type IUserList = {
   pageInfo?: Maybe<IPageInfo>;
 };
 
+type IUserWhereUniqueInput = {
+  id: Scalars['String'];
+};
+
 type IMinimalAddressFragment = {
   __typename?: 'Address';
   id: string;
@@ -226,6 +270,13 @@ type IRegularAddressFragment = {
   country: string;
   city: string;
   district: string;
+};
+
+type IRegularInventoryFragment = {
+  __typename?: 'Inventory';
+  id: string;
+  name: string;
+  description?: string | null;
 };
 
 type IRegularPageInfoFragment = {
@@ -255,30 +306,12 @@ type IRegularUserFragment = {
 };
 
 type ICreateAddressMutationVariables = Exact<{
-  data?: InputMaybe<IAddressCreateInput>;
+  data: IAddressCreateInput;
 }>;
 
 type ICreateAddressMutation = {
   __typename?: 'Mutation';
   createAddress?: {
-    __typename?: 'Address';
-    id: string;
-    ward: number;
-    tole?: string | null;
-    createdOn: any;
-    country: string;
-    city: string;
-    district: string;
-  } | null;
-};
-
-type IRemoveAddressMutationVariables = Exact<{
-  where: IIdWhereUniqueInput;
-}>;
-
-type IRemoveAddressMutation = {
-  __typename?: 'Mutation';
-  removeAddress?: {
     __typename?: 'Address';
     id: string;
     ward: number;
@@ -317,13 +350,45 @@ type ICreateUserMutation = {
   } | null;
 };
 
-type IRemoveUserMutationVariables = Exact<{
-  where: IIdWhereUniqueInput;
+type ICreateInventoryMutationVariables = Exact<{
+  data: IInventoryCreateInput;
 }>;
 
-type IRemoveUserMutation = {
+type ICreateInventoryMutation = {
   __typename?: 'Mutation';
-  removeUser?: {
+  createInventory?: {
+    __typename?: 'Inventory';
+    id: string;
+    name: string;
+    description?: string | null;
+  } | null;
+};
+
+type IDeleteAddressMutationVariables = Exact<{
+  where: IAddressWhereUniqueInput;
+}>;
+
+type IDeleteAddressMutation = {
+  __typename?: 'Mutation';
+  deleteAddress?: {
+    __typename?: 'Address';
+    id: string;
+    ward: number;
+    tole?: string | null;
+    createdOn: any;
+    country: string;
+    city: string;
+    district: string;
+  } | null;
+};
+
+type IDeleteUserMutationVariables = Exact<{
+  where: IUserWhereUniqueInput;
+}>;
+
+type IDeleteUserMutation = {
+  __typename?: 'Mutation';
+  deleteUser?: {
     __typename?: 'User';
     id: string;
     balance: number;
@@ -344,6 +409,20 @@ type IRemoveUserMutation = {
   } | null;
 };
 
+type IDeleteInventoryMutationVariables = Exact<{
+  where: IInventoryWhereUniqueInput;
+}>;
+
+type IDeleteInventoryMutation = {
+  __typename?: 'Mutation';
+  deleteInventory?: {
+    __typename?: 'Inventory';
+    id: string;
+    name: string;
+    description?: string | null;
+  } | null;
+};
+
 type IAddressesQueryVariables = Exact<{ [key: string]: never }>;
 
 type IAddressesQuery = {
@@ -359,6 +438,59 @@ type IAddressesQuery = {
       country: string;
       city: string;
       district: string;
+    }> | null;
+    pageInfo?: {
+      __typename?: 'PageInfo';
+      endCursor?: string | null;
+      hasNextPage: boolean;
+    } | null;
+  } | null;
+};
+
+type IUsersQueryVariables = Exact<{ [key: string]: never }>;
+
+type IUsersQuery = {
+  __typename?: 'Query';
+  users?: {
+    __typename?: 'UserList';
+    items?: Array<{
+      __typename?: 'User';
+      id: string;
+      balance: number;
+      name: string;
+      email?: string | null;
+      institution: string;
+      description?: string | null;
+      address?: {
+        __typename?: 'Address';
+        id: string;
+        ward: number;
+        tole?: string | null;
+        createdOn: any;
+        country: string;
+        city: string;
+        district: string;
+      } | null;
+    }> | null;
+    pageInfo?: {
+      __typename?: 'PageInfo';
+      endCursor?: string | null;
+      hasNextPage: boolean;
+    } | null;
+  } | null;
+};
+
+type IInventoriesQueryVariables = Exact<{ [key: string]: never }>;
+
+type IInventoriesQuery = {
+  __typename?: 'Query';
+  inventories?: {
+    __typename?: 'InventoryList';
+    items?: Array<{
+      __typename?: 'Inventory';
+      id: string;
+      name: string;
+      description?: string | null;
     }> | null;
     pageInfo?: {
       __typename?: 'PageInfo';
@@ -388,54 +520,8 @@ type IMinimalAddressesQuery = {
   } | null;
 };
 
-type IAddressQueryVariables = Exact<{
-  where?: InputMaybe<IIdWhereUniqueInput>;
-}>;
-
-type IAddressQuery = {
-  __typename?: 'Query';
-  address?: {
-    __typename?: 'Address';
-    id: string;
-    ward: number;
-    tole?: string | null;
-    createdOn: any;
-    country: string;
-    city: string;
-    district: string;
-  } | null;
-};
-
-type IUsersQueryVariables = Exact<{ [key: string]: never }>;
-
-type IUsersQuery = {
-  __typename?: 'Query';
-  users?: {
-    __typename?: 'UserList';
-    items?: Array<{
-      __typename?: 'User';
-      id: string;
-      balance: number;
-      name: string;
-      email?: string | null;
-      institution: string;
-      description?: string | null;
-      address?: {
-        __typename?: 'Address';
-        id: string;
-        ward: number;
-        tole?: string | null;
-        createdOn: any;
-        country: string;
-        city: string;
-        district: string;
-      } | null;
-    }> | null;
-  } | null;
-};
-
 type IUserQueryVariables = Exact<{
-  where?: InputMaybe<IIdWhereUniqueInput>;
+  where?: InputMaybe<IUserWhereUniqueInput>;
 }>;
 
 type IUserQuery = {
@@ -458,5 +544,37 @@ type IUserQuery = {
       city: string;
       district: string;
     } | null;
+  } | null;
+};
+
+type IAddressQueryVariables = Exact<{
+  where?: InputMaybe<IAddressWhereUniqueInput>;
+}>;
+
+type IAddressQuery = {
+  __typename?: 'Query';
+  address?: {
+    __typename?: 'Address';
+    id: string;
+    ward: number;
+    tole?: string | null;
+    createdOn: any;
+    country: string;
+    city: string;
+    district: string;
+  } | null;
+};
+
+type IInventoryQueryVariables = Exact<{
+  where?: InputMaybe<IInventoryWhereUniqueInput>;
+}>;
+
+type IInventoryQuery = {
+  __typename?: 'Query';
+  inventory?: {
+    __typename?: 'Inventory';
+    id: string;
+    name: string;
+    description?: string | null;
   } | null;
 };

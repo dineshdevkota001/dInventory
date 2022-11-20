@@ -1,0 +1,17 @@
+mutation CreateAddress($data: AddressCreateInput!) {
+  createAddress(data: $data) {
+    ...RegularAddress
+  }
+}
+
+mutation CreateUser($data: UserCreateInput!) {
+  createUser(data: $data) {
+    ...RegularUser
+  }
+}
+
+mutation CreateInventory($data: InventoryCreateInput!) {
+  createInventory(data: $data) {
+    ...RegularInventory
+  }
+}
