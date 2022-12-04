@@ -15,6 +15,43 @@ export const RegularInventoryFragmentDoc = gql`
     description
   }
 `;
+export const RegularProductFragmentDoc = gql`
+  fragment RegularProduct on Product {
+    id
+    name
+    type
+    imageUrl
+    description
+  }
+`;
+export const MinimalProductFragmentDoc = gql`
+  fragment MinimalProduct on Product {
+    id
+    name
+  }
+`;
+export const RegularItemFragmentDoc = gql`
+  fragment RegularItem on Item {
+    id
+    packing
+    productId
+    unitType
+    unitNumber
+    buyPrice
+    wholesalePrice
+    sellPrice
+  }
+`;
+export const MinimalItemFragmentDoc = gql`
+  fragment MinimalItem on Item {
+    id
+    packing
+    product {
+      id
+      name
+    }
+  }
+`;
 export const RegularPageInfoFragmentDoc = gql`
   fragment RegularPageInfo on PageInfo {
     endCursor
@@ -135,8 +172,8 @@ export function useDeleteInventoryMutation() {
   >(DeleteInventoryDocument);
 }
 export const AddressesDocument = gql`
-  query Addresses {
-    addresses {
+  query Addresses($after: String, $first: Int) {
+    addresses(after: $after, first: $first) {
       items {
         ...RegularAddress
       }
@@ -158,8 +195,8 @@ export function useAddressesQuery(
   });
 }
 export const UsersDocument = gql`
-  query Users {
-    users {
+  query Users($after: String, $first: Int) {
+    users(after: $after, first: $first) {
       items {
         ...RegularUser
       }
@@ -181,8 +218,8 @@ export function useUsersQuery(
   });
 }
 export const InventoriesDocument = gql`
-  query Inventories {
-    inventories {
+  query Inventories($after: String, $first: Int) {
+    inventories(after: $after, first: $first) {
       items {
         ...RegularInventory
       }
@@ -203,19 +240,61 @@ export function useInventoriesQuery(
     ...options,
   });
 }
-export const MinimalAddressesDocument = gql`
-  query MinimalAddresses {
-    addresses {
+export const ProductsDocument = gql`
+  query Products($after: String, $first: Int) {
+    products(after: $after, first: $first) {
       items {
-        ...MinimalAddress
+        ...RegularProduct
       }
       pageInfo {
         ...RegularPageInfo
       }
     }
   }
-  ${MinimalAddressFragmentDoc}
+  ${RegularProductFragmentDoc}
   ${RegularPageInfoFragmentDoc}
+`;
+
+export function useProductsQuery(
+  options?: Omit<Urql.UseQueryArgs<IProductsQueryVariables>, 'query'>,
+) {
+  return Urql.useQuery<IProductsQuery, IProductsQueryVariables>({
+    query: ProductsDocument,
+    ...options,
+  });
+}
+export const ItemsDocument = gql`
+  query Items($after: String, $first: Int) {
+    items(after: $after, first: $first) {
+      items {
+        ...RegularItem
+      }
+      pageInfo {
+        ...RegularPageInfo
+      }
+    }
+  }
+  ${RegularItemFragmentDoc}
+  ${RegularPageInfoFragmentDoc}
+`;
+
+export function useItemsQuery(
+  options?: Omit<Urql.UseQueryArgs<IItemsQueryVariables>, 'query'>,
+) {
+  return Urql.useQuery<IItemsQuery, IItemsQueryVariables>({
+    query: ItemsDocument,
+    ...options,
+  });
+}
+export const MinimalAddressesDocument = gql`
+  query MinimalAddresses {
+    addresses {
+      items {
+        ...MinimalAddress
+      }
+    }
+  }
+  ${MinimalAddressFragmentDoc}
 `;
 
 export function useMinimalAddressesQuery(
@@ -224,6 +303,25 @@ export function useMinimalAddressesQuery(
   return Urql.useQuery<IMinimalAddressesQuery, IMinimalAddressesQueryVariables>(
     { query: MinimalAddressesDocument, ...options },
   );
+}
+export const MinimalProductsDocument = gql`
+  query MinimalProducts {
+    products {
+      items {
+        ...MinimalProduct
+      }
+    }
+  }
+  ${MinimalProductFragmentDoc}
+`;
+
+export function useMinimalProductsQuery(
+  options?: Omit<Urql.UseQueryArgs<IMinimalProductsQueryVariables>, 'query'>,
+) {
+  return Urql.useQuery<IMinimalProductsQuery, IMinimalProductsQueryVariables>({
+    query: MinimalProductsDocument,
+    ...options,
+  });
 }
 export const UserDocument = gql`
   query User($where: UserWhereUniqueInput) {
@@ -273,6 +371,40 @@ export function useInventoryQuery(
 ) {
   return Urql.useQuery<IInventoryQuery, IInventoryQueryVariables>({
     query: InventoryDocument,
+    ...options,
+  });
+}
+export const ProductDocument = gql`
+  query Product($where: ProductWhereUniqueInput) {
+    product(where: $where) {
+      ...RegularProduct
+    }
+  }
+  ${RegularProductFragmentDoc}
+`;
+
+export function useProductQuery(
+  options?: Omit<Urql.UseQueryArgs<IProductQueryVariables>, 'query'>,
+) {
+  return Urql.useQuery<IProductQuery, IProductQueryVariables>({
+    query: ProductDocument,
+    ...options,
+  });
+}
+export const ItemDocument = gql`
+  query Item($where: ItemWhereUniqueInput) {
+    item(where: $where) {
+      ...RegularItem
+    }
+  }
+  ${RegularItemFragmentDoc}
+`;
+
+export function useItemQuery(
+  options?: Omit<Urql.UseQueryArgs<IItemQueryVariables>, 'query'>,
+) {
+  return Urql.useQuery<IItemQuery, IItemQueryVariables>({
+    query: ItemDocument,
     ...options,
   });
 }

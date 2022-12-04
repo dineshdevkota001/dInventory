@@ -1,4 +1,4 @@
-import { AddOutlined } from '@mui/icons-material';
+import { AddHomeOutlined } from '@mui/icons-material';
 import { Button } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -16,10 +16,9 @@ export default function AddInventory() {
     formState: { isSubmitting },
   } = useForm({
     defaultValues: {
-      addressId: '',
-      institution: '',
       name: '',
-    } as IInventoryCreateInput,
+      description: '',
+    },
     resolver: yupResolver(createInventory),
   });
 
@@ -35,7 +34,7 @@ export default function AddInventory() {
   return (
     <ButtonAlert
       title="Add Inventory"
-      button={<Button startIcon={<AddOutlined />}>Add New</Button>}
+      button={<Button startIcon={<AddHomeOutlined />}>Add New</Button>}
     >
       <FormContent
         onSubmit={handleSubmit(onSubmit)}

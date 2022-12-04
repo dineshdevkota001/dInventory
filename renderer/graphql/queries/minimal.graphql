@@ -3,8 +3,13 @@ query MinimalAddresses {
     items {
       ...MinimalAddress
     }
-    pageInfo {
-      ...RegularPageInfo
+  }
+}
+
+query MinimalProducts {
+  products {
+    items {
+      ...MinimalProduct
     }
   }
 }

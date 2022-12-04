@@ -1,5 +1,5 @@
-query Addresses {
-  addresses {
+query Addresses($after: String, $first: Int) {
+  addresses(after: $after, first: $first) {
     items {
       ...RegularAddress
     }
@@ -9,8 +9,8 @@ query Addresses {
   }
 }
 
-query Users {
-  users {
+query Users($after: String, $first: Int) {
+  users(after: $after, first: $first) {
     items {
       ...RegularUser
     }
@@ -20,10 +20,30 @@ query Users {
   }
 }
 
-query Inventories {
-  inventories {
+query Inventories($after: String, $first: Int) {
+  inventories(after: $after, first: $first) {
     items {
       ...RegularInventory
+    }
+    pageInfo {
+      ...RegularPageInfo
+    }
+  }
+}
+query Products($after: String, $first: Int) {
+  products(after: $after, first: $first) {
+    items {
+      ...RegularProduct
+    }
+    pageInfo {
+      ...RegularPageInfo
+    }
+  }
+}
+query Items($after: String, $first: Int) {
+  items(after: $after, first: $first) {
+    items {
+      ...RegularItem
     }
     pageInfo {
       ...RegularPageInfo

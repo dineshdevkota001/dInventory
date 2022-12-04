@@ -29,18 +29,18 @@ type IAddress = {
   ward: Scalars['Int'];
 };
 
+type IAddressConnection = {
+  __typename?: 'AddressConnection';
+  items?: Maybe<Array<IAddress>>;
+  pageInfo?: Maybe<IPageInfo>;
+};
+
 type IAddressCreateInput = {
   city?: InputMaybe<Scalars['String']>;
   country?: InputMaybe<Scalars['String']>;
   district?: InputMaybe<Scalars['String']>;
   tole: Scalars['String'];
   ward: Scalars['Int'];
-};
-
-type IAddressList = {
-  __typename?: 'AddressList';
-  items?: Maybe<Array<IAddress>>;
-  pageInfo?: Maybe<IPageInfo>;
 };
 
 type IAddressWhereUniqueInput = {
@@ -55,15 +55,15 @@ type IInventory = {
   name: Scalars['String'];
 };
 
+type IInventoryConnection = {
+  __typename?: 'InventoryConnection';
+  items?: Maybe<Array<IInventory>>;
+  pageInfo?: Maybe<IPageInfo>;
+};
+
 type IInventoryCreateInput = {
   description?: InputMaybe<Scalars['String']>;
   name: Scalars['String'];
-};
-
-type IInventoryList = {
-  __typename?: 'InventoryList';
-  items?: Maybe<Array<IInventory>>;
-  pageInfo?: Maybe<IPageInfo>;
 };
 
 type IInventoryWhereUniqueInput = {
@@ -78,6 +78,7 @@ type IItem = {
   id: Scalars['ID'];
   inventoryId: Scalars['ID'];
   packing?: Maybe<Scalars['String']>;
+  product?: Maybe<IProduct>;
   productId?: Maybe<Scalars['ID']>;
   sellPrice: Scalars['Float'];
   /** No of items in a unit or carton. */
@@ -87,13 +88,37 @@ type IItem = {
   wholesalePrice?: Maybe<Scalars['Float']>;
 };
 
+type IItemConnection = {
+  __typename?: 'ItemConnection';
+  items?: Maybe<Array<IItem>>;
+  pageInfo?: Maybe<IPageInfo>;
+};
+
+type IItemCreateInput = {
+  buyPrice: Scalars['Float'];
+  inventoryId: Scalars['ID'];
+  packing: Scalars['String'];
+  productId: Scalars['ID'];
+  sellPrice: Scalars['Float'];
+  unitNumber: Scalars['Int'];
+  wholesalePrice?: InputMaybe<Scalars['Float']>;
+};
+
+type IItemWhereUniqueInput = {
+  id: Scalars['String'];
+};
+
 type IMutation = {
   __typename?: 'Mutation';
   createAddress?: Maybe<IAddress>;
   createInventory?: Maybe<IInventory>;
+  createItem?: Maybe<IItem>;
+  createProduct?: Maybe<IProduct>;
   createUser?: Maybe<IUser>;
   deleteAddress?: Maybe<IAddress>;
   deleteInventory?: Maybe<IInventory>;
+  deleteItem?: Maybe<IItem>;
+  deleteProduct?: Maybe<IProduct>;
   deleteUser?: Maybe<IUser>;
 };
 
@@ -103,6 +128,14 @@ type IMutationCreateAddressArgs = {
 
 type IMutationCreateInventoryArgs = {
   data: IInventoryCreateInput;
+};
+
+type IMutationCreateItemArgs = {
+  data: IItemCreateInput;
+};
+
+type IMutationCreateProductArgs = {
+  data: IProductCreateInput;
 };
 
 type IMutationCreateUserArgs = {
@@ -115,6 +148,14 @@ type IMutationDeleteAddressArgs = {
 
 type IMutationDeleteInventoryArgs = {
   where: IInventoryWhereUniqueInput;
+};
+
+type IMutationDeleteItemArgs = {
+  where: IItemWhereUniqueInput;
+};
+
+type IMutationDeleteProductArgs = {
+  where: IProductWhereUniqueInput;
 };
 
 type IMutationDeleteUserArgs = {
@@ -137,6 +178,19 @@ type IProduct = {
   type: ProductType;
 };
 
+type IProductConnection = {
+  __typename?: 'ProductConnection';
+  items?: Maybe<Array<IProduct>>;
+  pageInfo?: Maybe<IPageInfo>;
+};
+
+type IProductCreateInput = {
+  description?: InputMaybe<Scalars['String']>;
+  imageUrl?: InputMaybe<Scalars['String']>;
+  name: Scalars['String'];
+  type: ProductType;
+};
+
 enum ProductType {
   Bolus = 'Bolus',
   Feed = 'Feed',
@@ -145,14 +199,22 @@ enum ProductType {
   Tool = 'Tool',
 }
 
+type IProductWhereUniqueInput = {
+  id: Scalars['String'];
+};
+
 type IQuery = {
   __typename?: 'Query';
   address?: Maybe<IAddress>;
-  addresses?: Maybe<IAddressList>;
-  inventories?: Maybe<IInventoryList>;
+  addresses?: Maybe<IAddressConnection>;
+  inventories?: Maybe<IInventoryConnection>;
   inventory?: Maybe<IInventory>;
+  item?: Maybe<IItem>;
+  items?: Maybe<IItemConnection>;
+  product?: Maybe<IProduct>;
+  products?: Maybe<IProductConnection>;
   user?: Maybe<IUser>;
-  users?: Maybe<IUserList>;
+  users?: Maybe<IUserConnection>;
 };
 
 type IQueryAddressArgs = {
@@ -171,6 +233,24 @@ type IQueryInventoriesArgs = {
 
 type IQueryInventoryArgs = {
   where?: InputMaybe<IInventoryWhereUniqueInput>;
+};
+
+type IQueryItemArgs = {
+  where?: InputMaybe<IItemWhereUniqueInput>;
+};
+
+type IQueryItemsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+};
+
+type IQueryProductArgs = {
+  where?: InputMaybe<IProductWhereUniqueInput>;
+};
+
+type IQueryProductsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
 };
 
 type IQueryUserArgs = {
@@ -233,6 +313,12 @@ type IUser = {
   transactions?: Maybe<Array<ITransaction>>;
 };
 
+type IUserConnection = {
+  __typename?: 'UserConnection';
+  items?: Maybe<Array<IUser>>;
+  pageInfo?: Maybe<IPageInfo>;
+};
+
 type IUserCreateInput = {
   addressId: Scalars['ID'];
   balance?: InputMaybe<Scalars['Float']>;
@@ -242,12 +328,6 @@ type IUserCreateInput = {
   institution: Scalars['String'];
   name: Scalars['String'];
   phoneNumber?: InputMaybe<Scalars['String']>;
-};
-
-type IUserList = {
-  __typename?: 'UserList';
-  items?: Maybe<Array<IUser>>;
-  pageInfo?: Maybe<IPageInfo>;
 };
 
 type IUserWhereUniqueInput = {
@@ -277,6 +357,40 @@ type IRegularInventoryFragment = {
   id: string;
   name: string;
   description?: string | null;
+};
+
+type IRegularProductFragment = {
+  __typename?: 'Product';
+  id: string;
+  name: string;
+  type: ProductType;
+  imageUrl?: string | null;
+  description?: string | null;
+};
+
+type IMinimalProductFragment = {
+  __typename?: 'Product';
+  id: string;
+  name: string;
+};
+
+type IRegularItemFragment = {
+  __typename?: 'Item';
+  id: string;
+  packing?: string | null;
+  productId?: string | null;
+  unitType: string;
+  unitNumber?: number | null;
+  buyPrice: number;
+  wholesalePrice?: number | null;
+  sellPrice: number;
+};
+
+type IMinimalItemFragment = {
+  __typename?: 'Item';
+  id: string;
+  packing?: string | null;
+  product?: { __typename?: 'Product'; id: string; name: string } | null;
 };
 
 type IRegularPageInfoFragment = {
@@ -423,12 +537,15 @@ type IDeleteInventoryMutation = {
   } | null;
 };
 
-type IAddressesQueryVariables = Exact<{ [key: string]: never }>;
+type IAddressesQueryVariables = Exact<{
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+}>;
 
 type IAddressesQuery = {
   __typename?: 'Query';
   addresses?: {
-    __typename?: 'AddressList';
+    __typename?: 'AddressConnection';
     items?: Array<{
       __typename?: 'Address';
       id: string;
@@ -447,12 +564,15 @@ type IAddressesQuery = {
   } | null;
 };
 
-type IUsersQueryVariables = Exact<{ [key: string]: never }>;
+type IUsersQueryVariables = Exact<{
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+}>;
 
 type IUsersQuery = {
   __typename?: 'Query';
   users?: {
-    __typename?: 'UserList';
+    __typename?: 'UserConnection';
     items?: Array<{
       __typename?: 'User';
       id: string;
@@ -480,12 +600,15 @@ type IUsersQuery = {
   } | null;
 };
 
-type IInventoriesQueryVariables = Exact<{ [key: string]: never }>;
+type IInventoriesQueryVariables = Exact<{
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+}>;
 
 type IInventoriesQuery = {
   __typename?: 'Query';
   inventories?: {
-    __typename?: 'InventoryList';
+    __typename?: 'InventoryConnection';
     items?: Array<{
       __typename?: 'Inventory';
       id: string;
@@ -500,23 +623,81 @@ type IInventoriesQuery = {
   } | null;
 };
 
-type IMinimalAddressesQueryVariables = Exact<{ [key: string]: never }>;
+type IProductsQueryVariables = Exact<{
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+}>;
 
-type IMinimalAddressesQuery = {
+type IProductsQuery = {
   __typename?: 'Query';
-  addresses?: {
-    __typename?: 'AddressList';
+  products?: {
+    __typename?: 'ProductConnection';
     items?: Array<{
-      __typename?: 'Address';
+      __typename?: 'Product';
       id: string;
-      city: string;
-      tole?: string | null;
+      name: string;
+      type: ProductType;
+      imageUrl?: string | null;
+      description?: string | null;
     }> | null;
     pageInfo?: {
       __typename?: 'PageInfo';
       endCursor?: string | null;
       hasNextPage: boolean;
     } | null;
+  } | null;
+};
+
+type IItemsQueryVariables = Exact<{
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+}>;
+
+type IItemsQuery = {
+  __typename?: 'Query';
+  items?: {
+    __typename?: 'ItemConnection';
+    items?: Array<{
+      __typename?: 'Item';
+      id: string;
+      packing?: string | null;
+      productId?: string | null;
+      unitType: string;
+      unitNumber?: number | null;
+      buyPrice: number;
+      wholesalePrice?: number | null;
+      sellPrice: number;
+    }> | null;
+    pageInfo?: {
+      __typename?: 'PageInfo';
+      endCursor?: string | null;
+      hasNextPage: boolean;
+    } | null;
+  } | null;
+};
+
+type IMinimalAddressesQueryVariables = Exact<{ [key: string]: never }>;
+
+type IMinimalAddressesQuery = {
+  __typename?: 'Query';
+  addresses?: {
+    __typename?: 'AddressConnection';
+    items?: Array<{
+      __typename?: 'Address';
+      id: string;
+      city: string;
+      tole?: string | null;
+    }> | null;
+  } | null;
+};
+
+type IMinimalProductsQueryVariables = Exact<{ [key: string]: never }>;
+
+type IMinimalProductsQuery = {
+  __typename?: 'Query';
+  products?: {
+    __typename?: 'ProductConnection';
+    items?: Array<{ __typename?: 'Product'; id: string; name: string }> | null;
   } | null;
 };
 
@@ -576,5 +757,40 @@ type IInventoryQuery = {
     id: string;
     name: string;
     description?: string | null;
+  } | null;
+};
+
+type IProductQueryVariables = Exact<{
+  where?: InputMaybe<IProductWhereUniqueInput>;
+}>;
+
+type IProductQuery = {
+  __typename?: 'Query';
+  product?: {
+    __typename?: 'Product';
+    id: string;
+    name: string;
+    type: ProductType;
+    imageUrl?: string | null;
+    description?: string | null;
+  } | null;
+};
+
+type IItemQueryVariables = Exact<{
+  where?: InputMaybe<IItemWhereUniqueInput>;
+}>;
+
+type IItemQuery = {
+  __typename?: 'Query';
+  item?: {
+    __typename?: 'Item';
+    id: string;
+    packing?: string | null;
+    productId?: string | null;
+    unitType: string;
+    unitNumber?: number | null;
+    buyPrice: number;
+    wholesalePrice?: number | null;
+    sellPrice: number;
   } | null;
 };

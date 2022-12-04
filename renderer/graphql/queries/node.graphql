@@ -15,3 +15,15 @@ query Inventory($where: InventoryWhereUniqueInput) {
     ...RegularInventory
   }
 }
+
+query Product($where: ProductWhereUniqueInput) {
+  product(where: $where) {
+    ...RegularProduct
+  }
+}
+
+query Item($where: ItemWhereUniqueInput) {
+  item(where: $where) {
+    ...RegularItem
+  }
+}

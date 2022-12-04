@@ -1,0 +1,32 @@
+fragment RegularProduct on Product {
+  id
+  name
+  type
+  imageUrl
+  description
+}
+
+fragment MinimalProduct on Product {
+  id
+  name
+}
+
+fragment RegularItem on Item {
+  id
+  packing
+  productId
+  unitType
+  unitNumber
+  buyPrice
+  wholesalePrice
+  sellPrice
+}
+
+fragment MinimalItem on Item {
+  id
+  packing
+  product {
+    id
+    name
+  }
+}

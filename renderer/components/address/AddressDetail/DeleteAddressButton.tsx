@@ -1,22 +1,22 @@
 import { ButtonAlert, IButtonAlertProps } from '@components/core/ConfirmDialog';
-import { useRemoveAddressMutation } from '@generated/graphql';
+import { useDeleteAddressMutation } from '@generated/graphql';
 
 interface IDeleteAddressProps extends Pick<IButtonAlertProps, 'button'> {
   id: string;
 }
 
 export default function DeleteAddress({ button, id }: IDeleteAddressProps) {
-  const [{ fetching }, removeAddress] = useRemoveAddressMutation();
+  const [{ fetching }, deleteAddress] = useDeleteAddressMutation();
 
-  const handleRemove = () =>
-    removeAddress({ where: { id } }).catch(console.log);
+  const handleDelete = () =>
+    deleteAddress({ where: { id } }).catch(console.log);
 
   return (
     <ButtonAlert
       {...{ button }}
       title="Delete Address!?"
       description="You cannot reverse this and this address will be deleted."
-      onConfirm={handleRemove}
+      onConfirm={handleDelete}
       confirmLoading={fetching}
       confirmProps={{
         color: 'error',

@@ -91,7 +91,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "AddressList",
+        "name": "AddressConnection",
         "fields": [
           {
             "name": "items",
@@ -174,7 +174,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "InventoryList",
+        "name": "InventoryConnection",
         "fields": [
           {
             "name": "items",
@@ -268,6 +268,15 @@
             "args": []
           },
           {
+            "name": "product",
+            "type": {
+              "kind": "OBJECT",
+              "name": "Product",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
             "name": "productId",
             "type": {
               "kind": "SCALAR",
@@ -318,6 +327,37 @@
       },
       {
         "kind": "OBJECT",
+        "name": "ItemConnection",
+        "fields": [
+          {
+            "name": "items",
+            "type": {
+              "kind": "LIST",
+              "ofType": {
+                "kind": "NON_NULL",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Item",
+                  "ofType": null
+                }
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "pageInfo",
+            "type": {
+              "kind": "OBJECT",
+              "name": "PageInfo",
+              "ofType": null
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
         "name": "Mutation",
         "fields": [
           {
@@ -342,6 +382,46 @@
             "type": {
               "kind": "OBJECT",
               "name": "Inventory",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "data",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Any"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "createItem",
+            "type": {
+              "kind": "OBJECT",
+              "name": "Item",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "data",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Any"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "createProduct",
+            "type": {
+              "kind": "OBJECT",
+              "name": "Product",
               "ofType": null
             },
             "args": [
@@ -402,6 +482,46 @@
             "type": {
               "kind": "OBJECT",
               "name": "Inventory",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "where",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Any"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "deleteItem",
+            "type": {
+              "kind": "OBJECT",
+              "name": "Item",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "where",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Any"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "deleteProduct",
+            "type": {
+              "kind": "OBJECT",
+              "name": "Product",
               "ofType": null
             },
             "args": [
@@ -539,6 +659,37 @@
       },
       {
         "kind": "OBJECT",
+        "name": "ProductConnection",
+        "fields": [
+          {
+            "name": "items",
+            "type": {
+              "kind": "LIST",
+              "ofType": {
+                "kind": "NON_NULL",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Product",
+                  "ofType": null
+                }
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "pageInfo",
+            "type": {
+              "kind": "OBJECT",
+              "name": "PageInfo",
+              "ofType": null
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
         "name": "Query",
         "fields": [
           {
@@ -562,7 +713,7 @@
             "name": "addresses",
             "type": {
               "kind": "OBJECT",
-              "name": "AddressList",
+              "name": "AddressConnection",
               "ofType": null
             },
             "args": [
@@ -586,7 +737,7 @@
             "name": "inventories",
             "type": {
               "kind": "OBJECT",
-              "name": "InventoryList",
+              "name": "InventoryConnection",
               "ofType": null
             },
             "args": [
@@ -624,6 +775,88 @@
             ]
           },
           {
+            "name": "item",
+            "type": {
+              "kind": "OBJECT",
+              "name": "Item",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "where",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              }
+            ]
+          },
+          {
+            "name": "items",
+            "type": {
+              "kind": "OBJECT",
+              "name": "ItemConnection",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "after",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              },
+              {
+                "name": "first",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              }
+            ]
+          },
+          {
+            "name": "product",
+            "type": {
+              "kind": "OBJECT",
+              "name": "Product",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "where",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              }
+            ]
+          },
+          {
+            "name": "products",
+            "type": {
+              "kind": "OBJECT",
+              "name": "ProductConnection",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "after",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              },
+              {
+                "name": "first",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              }
+            ]
+          },
+          {
             "name": "user",
             "type": {
               "kind": "OBJECT",
@@ -644,7 +877,7 @@
             "name": "users",
             "type": {
               "kind": "OBJECT",
-              "name": "UserList",
+              "name": "UserConnection",
               "ofType": null
             },
             "args": [
@@ -921,7 +1154,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "UserList",
+        "name": "UserConnection",
         "fields": [
           {
             "name": "items",

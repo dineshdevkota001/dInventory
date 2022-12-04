@@ -1,4 +1,4 @@
-import { AddOutlined } from '@mui/icons-material';
+import { AddLocationOutlined, AddOutlined } from '@mui/icons-material';
 import { Button, Checkbox, FormControlLabel, Stack } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -33,7 +33,7 @@ export default function AddAddress() {
   return (
     <ButtonAlert
       title="Add Address"
-      button={<Button startIcon={<AddOutlined />}>Add New</Button>}
+      button={<Button startIcon={<AddLocationOutlined />}>Add New</Button>}
     >
       <FormContent
         onSubmit={handleSubmit(onSubmit)}
